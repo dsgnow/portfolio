@@ -13,11 +13,13 @@ const StyledTitleTypography = styled(Typography)`
   font-weight: bold;
   white-space: nowrap;
   font-size: 3rem;
-  // color: ${(inSpace) => (inSpace ? 'white' : 'black')};
+  &.white {
+    color: white !important;
+  }
   @media (orientation: landscape) {
     font-size: 2rem;
   }
-  ${({ theme }) => `
+  ${({ theme }) => `s
    ${theme.breakpoints.up('sm')} {
     margin: 60px 0;
     ${theme.breakpoints.up('lg')} {
@@ -25,7 +27,11 @@ const StyledTitleTypography = styled(Typography)`
    `}
 `
 
-const StyledTypography = styled(Typography)``
+const StyledTypography = styled(Typography)`
+  &.white {
+    color: white !important;
+  }
+`
 
 const StyledStarTheme = styled.div`
   left: 0;
@@ -169,6 +175,7 @@ const Welcome = (props) => {
 
   const changeTheme = () => {
     setInSpace(!inSpace)
+    console.log(inSpace)
   }
 
   useEffect(() => {
@@ -224,6 +231,7 @@ const Welcome = (props) => {
         <WrapTexts>
           <Box sx={{ mt: 4 }}>
             <StyledTypography
+              className={inSpace ? 'white' : 'black'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -233,6 +241,7 @@ const Welcome = (props) => {
               mission duration:
             </StyledTypography>
             <StyledTypography
+              className={inSpace ? 'white' : 'black'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -244,6 +253,7 @@ const Welcome = (props) => {
           </Box>
           <Box sx={{ m: 2 }}>
             <StyledTitleTypography
+              className={inSpace ? 'white' : 'black'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -253,6 +263,7 @@ const Welcome = (props) => {
               MY JOURNEY
             </StyledTitleTypography>
             <StyledTypography
+              className={inSpace ? 'white' : 'black'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
