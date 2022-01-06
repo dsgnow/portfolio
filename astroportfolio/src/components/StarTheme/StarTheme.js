@@ -109,7 +109,7 @@ const StarTheme = (props) => {
       run() {
         this.clearCanvas()
         this.initCanvas()
-        this.generateStars(400)
+        this.generateStars(200)
         this.draw()
       }
     }
