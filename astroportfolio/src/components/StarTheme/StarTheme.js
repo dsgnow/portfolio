@@ -1,134 +1,262 @@
 const { useEffect } = require('react')
 const StarTheme = (props) => {
-  const speed = props.speed
+  const speed = 0.25
 
   useEffect(() => {
-    class Sky {
-      constructor(canvas) {
-        this.canvas = canvas
-        this.ctx = canvas.getContext('2d')
-        this.width = window.innerWidth
-        this.height = window.innerHeight
+
+    function start() {
+
+      //Helpers
+      function lineToAngle(x1, y1, length, radians) {
+        const x2 = x1 + length * Math.cos(radians),
+          y2 = y1 + length * Math.sin(radians);
+        return { x: x2, y: y2 };
       }
 
-      initCanvas() {
-        this.canvas.width = this.width
-        this.canvas.height = this.height
-
-        this.ctx.fillStyle = '#000000'
-        this.ctx.fillRect(0, 0, this.width, this.height)
+      function randomRange(min, max) {
+        return min + Math.random() * (max - min);
       }
 
-      generateStars(count) {
-        let stars = []
+      function degreesToRads(degrees) {
+        return degrees / 180 * Math.PI;
+      }
 
-        for (let i = 0; i < count; i++) {
-          const radius = Math.random() * 2 + 3
+      //Particle
+      const particle = {
+        x: 0,
+        y: 0,
+        vx: 0,
+        vy: 0,
+        radius: 0,
 
-          stars.push({
-            x: Math.random() * this.width,
-            y: Math.random() * this.height,
-            radius: radius,
-            originalRadius: radius,
-            color: '#fff',
-            speed: Math.random() * speed,
-            increase: Math.random() * 1 + 5,
-            alpha: Math.random()
-          })
+        create: function(x, y, speed, direction) {
+          const obj = Object.create(this);
+          obj.x = x;
+          obj.y = y;
+          obj.vx = Math.cos(direction) * speed;
+          obj.vy = Math.sin(direction) * speed;
+          return obj;
+        },
+
+        getSpeed: function() {
+          return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        },
+
+        setSpeed: function(speed) {
+          const heading = this.getHeading();
+          this.vx = Math.cos(heading) * speed;
+          this.vy = Math.sin(heading) * speed;
+        },
+
+        getHeading: function() {
+          return Math.atan2(this.vy, this.vx);
+        },
+
+        setHeading: function(heading) {
+          const speed = this.getSpeed();
+          this.vx = Math.cos(heading) * speed;
+          this.vy = Math.sin(heading) * speed;
+        },
+
+        update: function() {
+          this.x += this.vx;
+          this.y += this.vy;
         }
+      };
 
-        this.stars = stars
-      }
+      //Canvas and settings
+      let canvas = document.getElementById("canvas"),
+        context = canvas.getContext("2d"),
+        width = canvas.width = window.innerWidth,
+        height = canvas.height = window.innerHeight,
+        stars = [],
+        shootingStars = [],
+        layers = [
+          { speed: 0.015, scale: 0.2, count: 320 },
+          { speed: 0.03, scale: 0.5, count: 50 },
+          { speed: 0.05, scale: 0.75, count: 30 }
+        ],
+        starsAngle = 145,
+        shootingStarSpeed = {
+          min: 15,
+          max: 20
+        },
+        shootingStarOpacityDelta = 0.01,
+        trailLengthDelta = 0.01,
+        shootingStarEmittingInterval = 2000,
+        shootingStarLifeTime = 500,
+        maxTrailLength = 300,
+        starBaseRadius = 2,
+        shootingStarRadius = 3,
+        paused = false;
 
-      drawStars() {
-        this.stars.forEach((star) => {
-          this.drawStar(star)
-        })
-      }
-
-      updateStars() {
-        let flag = true
-        this.stars.forEach((star) => {
-          star.x += star.speed
-          star.y -= (star.speed * (this.width / 2 - star.x)) / 3000
-          star.radius = star.originalRadius * (Math.random() / 5 + 0.3)
-
-          if (star.radius < 0) {
-            star.radius += star.increase
-            star.alpha = 0.4
-          }
-
-          if (star.radius > 4.5) {
-            star.alpha = Math.random() * (0.5 - 0.4 + 0.5) + 0.4
-          }
-
-          if (star.radius > 3) {
-            star.radius -= star.increase
-          }
-
-          if (star.x > this.width + 2 * star.radius) {
-            star.x = -2 * star.radius
-          }
-        })
-      }
-
-      clearCanvas() {
-        this.ctx.fillStyle = '#000'
-        this.ctx.fillRect(0, 0, this.width, this.height)
-      }
-
-      drawStar(star) {
-        this.ctx.save()
-
-        this.ctx.fillStyle = star.color
-
-        this.ctx.beginPath()
-
-        this.ctx.translate(star.x, star.y)
-        this.ctx.moveTo(0, 0 - star.radius)
-
-        for (let i = 0; i < 5; i++) {
-          this.ctx.rotate((Math.PI / 180) * 36)
-          this.ctx.lineTo(0, 0 - star.radius * 0.5)
-          this.ctx.rotate((Math.PI / 180) * 36)
-          this.ctx.lineTo(0, 0 - star.radius)
-          this.ctx.globalAlpha = star.alpha
+      //Create all stars
+      for (let j = 0; j < layers.length; j += 1) {
+        const layer = layers[j];
+        for (let i = 0; i < layer.count; i += 1) {
+          const star = particle.create(randomRange(0, width), randomRange(0, height), 0, 0);
+          star.radius = starBaseRadius * layer.scale;
+          star.setSpeed(layer.speed);
+          star.setHeading(degreesToRads(starsAngle));
+          stars.push(star);
         }
-
-        this.ctx.fill()
-        this.ctx.restore()
       }
 
-      draw() {
-        this.clearCanvas()
-        this.drawStars()
-        this.updateStars()
-        window.requestAnimationFrame(() => this.draw())
+      function createShootingStar() {
+        const shootingStar = particle.create(randomRange(width / 2, width), randomRange(0, height / 2), 0, 0);
+        shootingStar.setSpeed(randomRange(shootingStarSpeed.min, shootingStarSpeed.max));
+        shootingStar.setHeading(degreesToRads(starsAngle));
+        shootingStar.radius = shootingStarRadius;
+        shootingStar.opacity = 0;
+        shootingStar.trailLengthDelta = 0;
+        shootingStar.isSpawning = true;
+        shootingStar.isDying = false;
+        shootingStars.push(shootingStar);
       }
 
-      run() {
-        this.clearCanvas()
-        this.initCanvas()
-        this.generateStars(200)
-        this.draw()
+      function killShootingStar(shootingStar) {
+        setTimeout(function() {
+          shootingStar.isDying = true;
+        }, shootingStarLifeTime);
       }
+
+      function update() {
+        if (!paused) {
+          context.clearRect(0, 0, width, height);
+          context.fillStyle = "#0e0f15";
+          context.fillRect(0, 0, width, height);
+          context.fill();
+
+          for (let i = 0; i < stars.length; i += 1) {
+            const star = stars[i];
+            star.update();
+            drawStar(star);
+            if (star.x > width) {
+              star.x = 0;
+            }
+            if (star.x < 0) {
+              star.x = width;
+            }
+            if (star.y > height) {
+              star.y = 0;
+            }
+            if (star.y < 0) {
+              star.y = height;
+            }
+          }
+
+          for (let i = 0; i < shootingStars.length; i += 1) {
+            const shootingStar = shootingStars[i];
+            if (shootingStar.isSpawning) {
+              shootingStar.opacity += shootingStarOpacityDelta;
+              if (shootingStar.opacity >= 1.0) {
+                shootingStar.isSpawning = false;
+                killShootingStar(shootingStar);
+              }
+            }
+            if (shootingStar.isDying) {
+              shootingStar.opacity -= shootingStarOpacityDelta;
+              if (shootingStar.opacity <= 0.0) {
+                shootingStar.isDying = false;
+                shootingStar.isDead = true;
+              }
+            }
+            shootingStar.trailLengthDelta += trailLengthDelta;
+
+            shootingStar.update();
+            if (shootingStar.opacity > 0.0) {
+              drawShootingStar(shootingStar);
+            }
+          }
+
+          //Delete dead shooting shootingStars
+          for (let i = shootingStars.length -1; i >= 0 ; i--){
+            if (shootingStars[i].isDead){
+              shootingStars.splice(i, 1);
+            }
+          }
+        }
+        requestAnimationFrame(update);
+      }
+
+      function drawStar(star) {
+        context.fillStyle = "rgb(185,185,185)";
+        context.beginPath();
+        context.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
+        context.fill();
+      }
+
+      function drawShootingStar(p) {
+        const x = p.x,
+          y = p.y,
+          currentTrailLength = (maxTrailLength * p.trailLengthDelta),
+          pos = lineToAngle(x, y, -currentTrailLength, p.getHeading());
+
+        context.fillStyle = "rgba(255, 255, 255, " + p.opacity + ")";
+        // context.beginPath();
+        // context.arc(x, y, p.radius, 0, Math.PI * 2, false);
+        // context.fill();
+        const starLength = 5;
+        context.beginPath();
+        context.moveTo(x - 1, y + 1);
+
+        context.lineTo(x, y + starLength);
+        context.lineTo(x + 1, y + 1);
+
+        context.lineTo(x + starLength, y);
+        context.lineTo(x + 1, y - 1);
+
+        context.lineTo(x, y + 1);
+        context.lineTo(x, y - starLength);
+
+        context.lineTo(x - 1, y - 1);
+        context.lineTo(x - starLength, y);
+
+        context.lineTo(x - 1, y + 1);
+        context.lineTo(x - starLength, y);
+
+        context.closePath();
+        context.fill();
+
+        //trail
+        context.fillStyle = "rgba(157, 206, 255, " + p.opacity + ")";
+        context.beginPath();
+        context.moveTo(x - 1, y - 1);
+        context.lineTo(pos.x, pos.y);
+        context.lineTo(x + 1, y + 1);
+        context.closePath();
+        context.fill();
+      }
+
+      //Run
+      update();
+
+      //Shooting stars
+      setInterval(function() {
+        if (paused) return;
+        createShootingStar();
+      }, shootingStarEmittingInterval);
+
+      window.onfocus = function () {
+        paused = false;
+      };
+
+      window.onblur = function () {
+        paused = true;
+      };
     }
 
-    const sky = new Sky(document.querySelector('#starTheme'))
-    sky.run()
+    start()
 
     const reloadCanvasOnResize = () => {
       window.location.reload(true)
-      if (document.querySelector('#starTheme').width < window.innerWidth) {
-        window.location.reload(true)
-      }
     }
     window.addEventListener('resize', reloadCanvasOnResize)
-  }, [speed])
+  }, [])
 
   return (
     <div>
-      <canvas id="starTheme"></canvas>
+      <canvas id="canvas"></canvas>
     </div>
   )
 }

@@ -107,7 +107,7 @@ function App() {
       <Suspense fallback={<p>Ładowanie...</p>}>
         <Routes>
           <Route path="/welcome" element={<Welcome speed={0.25} />} />
-          <Route path="/navigation" element={<Navigation speed={0} />} />
+          <Route path="/navigation" element={<Navigation speed={0.25} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

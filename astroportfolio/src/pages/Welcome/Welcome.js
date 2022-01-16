@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Button from '@material-ui/core/Button'
+import Button from '../../UI/Button/Button'
 import Typography from '@material-ui/core/Typography'
 import { useState, useEffect } from 'react'
 import StarTheme from '../../components/StarTheme/StarTheme'
@@ -42,11 +42,11 @@ const StyledStarTheme = styled.div`
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  position: relative;
   overflow: hidden;
   min-width: 320px;
   min-height: 500px;
   background-color: transparent;
+  justify-content: center;
   @media (orientation: landscape) {
     display: flex;
     flex-direction: row;
@@ -66,24 +66,41 @@ const WrapTexts = styled.div`
       opacity: 100%;
     }
   }
+  @media (orientation: landscape) {
+    flex-basis: auto;
+  }
+`
+
+const WrapAstronaut = styled.div`
+  flex-basis: 50%;
+  overflow: hidden;
+  @media (orientation: landscape) {
+    flex-basis: 60%;
+  }
+  @media (orientation: landscape) and (min-width: 1500px) {
+    flex-basis: 75%;
+  }
 `
 
 const Astronaut = styled.div`
-  flex-basis: 50%;
   position: relative;
-  top: 45%;
+  bottom: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 10%);
   overflow: hidden;
   width: 151vw;
   height: 151vw;
   border-radius: 50%;
   max-height: 100vh;
   @media (orientation: landscape) {
+    //top: 50%;
+    //max-width: 45vw;
+    //max-height: 45vw;
+    //transform: translate(-120%, -50%);
     top: 50%;
+    transform: translate(-50%, -50%);
     max-width: 45vw;
     max-height: 45vw;
-    transform: translate(-120%, -50%);
   }
 `
 
@@ -154,6 +171,7 @@ const StyledButton = styled(Button)`
   opacity: 0;
   animation: changeOpacity 1s ease-in-out 1 forwards;
   animation-delay: 1.7s;
+  z-index: 999;
   &:hover {
     border-width: 2px;
     color: white !important;
@@ -272,32 +290,32 @@ const Welcome = (props) => {
               variant="h5">
               to become front end developer
             </StyledTypography>
-            <StyledButton
+            <Button
               color="primary"
               variant="outlined"
               onClick={changeTheme}
-              style={inSpace ? { color: 'white' } : { color: 'black' }}>
-              NAVIGATE
-            </StyledButton>
+              style={inSpace ? { color: 'white' } : { color: 'black' }}
+              title="NAVIGATE">
+            </Button>
           </Box>
         </WrapTexts>
-        <Astronaut
-          style={
-            inSpace
-              ? { backgroundColor: 'transparent' }
-              : { backgroundColor: 'black' }
-          }>
-          <Box sx={{ m: 2 }}>
-            {!inSpace && <CircleImg src={circle} alt="circle" />}
-            <AstronautImg src={astronaut} alt="astronaut" />
-            <PlanetImg src={planet} alt="planet" />
-          </Box>
-          {!inSpace && (
-            <StyledStarTheme>
-              <StarTheme key={themeSpeed} speed={themeSpeed}></StarTheme>
-            </StyledStarTheme>
-          )}
-        </Astronaut>
+        <WrapAstronaut>
+          <Astronaut
+            style={
+              inSpace
+                ? { backgroundColor: 'transparent' }
+                : { backgroundColor: 'black' }
+            }>
+              {!inSpace && <CircleImg src={circle} alt="circle" />}
+              <AstronautImg src={astronaut} alt="astronaut" />
+              <PlanetImg src={planet} alt="planet" />
+            {!inSpace && (
+              <StyledStarTheme>
+                <StarTheme key={themeSpeed} speed={themeSpeed}></StarTheme>
+              </StyledStarTheme>
+            )}
+          </Astronaut>
+        </WrapAstronaut>
       </Wrapper>
     </>
   )
