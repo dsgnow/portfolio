@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
 const StyledButton = styled(Button)`
-  border-radius: 50px;
+  border-radius: 5px;
   margin-top: 20px;
   color: black;
   letter-spacing: 2px;

@@ -6,6 +6,7 @@ import console from "../../Assets/Images/console.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Button from '../../UI/Button/Button'
+import NaviButton from '../../UI/Button/NaviButton'
 
 const StyledTitleTypography = styled(Typography)`
   margin: unset !important;
@@ -60,13 +61,8 @@ const StyledButton = styled(Button)`
   animation-delay: 0s;
 `
 
-const NaviButton = styled(Button)`
-  color: white;
-  animation-delay: 0s;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
+const StyledNaviButton = styled(NaviButton)`
+  
 `
 
 const WrapNavi = styled.div`
@@ -75,22 +71,52 @@ const WrapNavi = styled.div`
   flex-basis: 80%;
   justify-content: center;
   align-items: flex-end;
+  @media (orientation: landscape) {
+    flex-basis: 50%;
+  }
 `
 
 const WrapConsole = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  border-width: 2px;
 `
 
-const MonitorImg = styled.img`
+const ShipDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #6b1600;
+  border-radius: 2px;
+  padding: 50px;
+  margin: 20px 50px;
+  gap: 30px;
+  background-color: rgba(40, 40, 40, 0.48);
   width: 90vw;
-  position: relative;
+  @media (min-height: 800px) {
+    gap: 50px;
+  }
+  @media (orientation: landscape) {
+    flex-direction: row;
+    padding: 30px;
+    margin: 20px 50px;
+    gap: 40px;
+  }
 `
 
 const ConsoleImg = styled.img`
   width: 90vw;
+  display: none;
+  @media (min-height: 700px) {
+    display: block;
+  }
+  @media (orientation: landscape) {
+    display: none;
+  }
 `
 
 function Navigation(props) {
@@ -114,12 +140,28 @@ function Navigation(props) {
         </WrapTexts>
         <WrapNavi>
           <WrapConsole>
-             <NaviButton
-               color="default"
-               variant="outlined"
-               title="Projects">
-            </NaviButton>
-            <MonitorImg src={monitor} alt="monitor" />
+            <ShipDisplay>
+              <StyledNaviButton
+                color="default"
+                variant="outlined"
+                title="Skills">
+              </StyledNaviButton>
+              <StyledNaviButton
+                color="default"
+                variant="outlined"
+                title="Projects">
+              </StyledNaviButton>
+              <StyledNaviButton
+                color="default"
+                variant="outlined"
+                title="About">
+              </StyledNaviButton>
+              <StyledNaviButton
+                color="default"
+                variant="outlined"
+                title="Contact">
+              </StyledNaviButton>
+            </ShipDisplay>
             <ConsoleImg src={console} alt="console" />
           </WrapConsole>
         </WrapNavi>

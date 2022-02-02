@@ -182,7 +182,7 @@ const StyledButton = styled(Button)`
 const Welcome = (props) => {
   const { speed } = props
   const [themeSpeed, setThemeSpeed] = useState(speed)
-  const [inSpace, setInSpace] = useState(false)
+  const [inSpace, setInSpace] = useState(true)
   const [time, setTime] = useState({
     months: '',
     days: '',
