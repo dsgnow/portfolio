@@ -2,7 +2,11 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   max-width: 1920px;
+  height: 100vh;
   margin: 0 auto;
 `
 function Layout(props) {

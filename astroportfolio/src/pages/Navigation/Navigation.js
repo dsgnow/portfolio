@@ -1,31 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import StarTheme from '../../components/StarTheme/StarTheme'
 import Box from "@mui/material/Box";
 import monitor from "../../Assets/Images/monitor.svg";
 import console from "../../Assets/Images/console.svg";
+import cocpit from "../../Assets/Images/cocpit.svg";
+import chair from "../../Assets/Images/chair.svg";
+import frame from "../../Assets/Images/frame.svg";
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
 import Button from '../../UI/Button/Button'
 import NaviButton from '../../UI/Button/NaviButton'
-
-const StyledTitleTypography = styled(Typography)`
-  margin: unset !important;
-  font-weight: bold;
-  white-space: nowrap;
-  font-size: 3rem;
-  &.white {
-    color: white !important;
-  }
-  @media (orientation: landscape) {
-    font-size: 2rem;
-  }
-  ${({ theme }) => `s
-   ${theme.breakpoints.up('sm')} {
-    margin: 60px 0;
-    ${theme.breakpoints.up('lg')} {
-    font-size: 5rem;
-   `}
-`
+import { useNavigate } from "react-router-dom";
 
 const StyledStarTheme = styled.div`
   left: 0;
@@ -37,16 +21,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
+  max-width: 1920px;
   height: 100vh;
-  min-height: -webkit-fill-available;
   justify-content: center;
   overflow: hidden;
+  @media(orientation: landscape) {
+    justify-content: flex-end;
+  }
 `
 
 const WrapTexts = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
+  flex-basis: 30%;
   justify-content: center;
   align-items: center;
   @keyframes changeOpacity {
@@ -62,7 +49,9 @@ const StyledButton = styled(Button)`
 `
 
 const StyledNaviButton = styled(NaviButton)`
-  
+  @media (min-width: 700px) {
+    flex-basis: 40%;
+  }
 `
 
 const WrapNavi = styled.div`
@@ -72,56 +61,118 @@ const WrapNavi = styled.div`
   justify-content: center;
   align-items: flex-end;
   @media (orientation: landscape) {
-    flex-basis: 50%;
+    flex-basis: 70%;
+    align-items: stretch;
   }
 `
 
 const WrapConsole = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   border-width: 2px;
+  width: 100%;
 `
 
 const ShipDisplay = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #6b1600;
-  border-radius: 2px;
-  padding: 50px;
-  margin: 20px 50px;
+  flex-wrap: wrap;
+  //border-style: solid;
+  //border-width: 2px;
+  //border-color: #6b1600;
+  //border-radius: 2px;
+  padding: 100px;
+  background-size: 100% 100%;
   gap: 30px;
-  background-color: rgba(40, 40, 40, 0.48);
-  width: 90vw;
+  width: 100%;
+  transform: scale(0.9);
   @media (min-height: 800px) {
     gap: 50px;
   }
   @media (orientation: landscape) {
     flex-direction: row;
-    padding: 30px;
+    padding: 50px 100px;
     margin: 20px 50px;
     gap: 40px;
+  }
+  @media (orientation: landscape) and (min-width: 950px) {
+    transform: scale(0.9);
+    max-width: 900px;
+    gap: 80px;
+    padding: 150px;
   }
 `
 
 const ConsoleImg = styled.img`
-  width: 90vw;
+  width: 90%;
   display: none;
   @media (min-height: 700px) {
     display: block;
+  }
+  @media (max-height: 1100px) {
+    width: 60%;
   }
   @media (orientation: landscape) {
     display: none;
   }
 `
 
+const Cocpit = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  @media (min-height: 900px) and (orientation: landscape) {
+    height: 300px;
+  }
+`
+
+const CocpitImg = styled.img`
+  width: 100%;
+  display: none;
+  position: absolute;
+  bottom: 0;
+  @media (min-height: 900px) and (orientation: landscape) {
+    display: block;
+  }
+`
+
+const ChairLeftImg = styled.img`
+  height: 100%;
+  display: none;
+  z-index: 1;
+  @media (min-height: 900px) and (orientation: landscape) {
+    display: block;
+  }
+`
+
+const ConsoleCenterImg = styled.img`
+  height: 100%;
+  display: none;
+  z-index: 1;
+  @media (min-height: 900px) and (orientation: landscape) {
+    display: block;
+  }
+`
+
+const ChairRightImg = styled.img`
+  height: 100%;
+  display: none;
+  z-index: 1;
+  transform: scale(-1, 1);
+  @media (min-height: 900px) and (orientation: landscape) {
+    display: block;
+  }
+`
+
 function Navigation(props) {
   const { speed } = props
   const [themeSpeed, setThemeSpeed] = useState(speed)
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -134,13 +185,14 @@ function Navigation(props) {
             <StyledButton
               color="default"
               variant="outlined"
-              title="ABORT NAVI">
+              title="ABORT NAVI"
+              onClick={() => navigate(-1)}>
             </StyledButton>
           </Box>
         </WrapTexts>
         <WrapNavi>
           <WrapConsole>
-            <ShipDisplay>
+            <ShipDisplay style={{ backgroundImage: `url(${frame}) ` }}>
               <StyledNaviButton
                 color="default"
                 variant="outlined"
@@ -163,6 +215,12 @@ function Navigation(props) {
               </StyledNaviButton>
             </ShipDisplay>
             <ConsoleImg src={console} alt="console" />
+            <Cocpit>
+              <CocpitImg src={cocpit} alt="cocpit" />
+              <ChairLeftImg src={chair} alt="chair" />
+              <ConsoleCenterImg src={console} alt="console" />
+              <ChairRightImg src={chair} alt="chair" />
+            </Cocpit>
           </WrapConsole>
         </WrapNavi>
       </Wrapper>

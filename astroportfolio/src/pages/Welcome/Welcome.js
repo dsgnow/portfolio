@@ -7,6 +7,8 @@ import Box from '@mui/material/Box'
 import circle from '../../Assets/Images/circle.png'
 import astronaut from '../../Assets/Images/astronaut.png'
 import planet from '../../Assets/Images/planet1.png'
+import React, { useCallback } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const StyledTitleTypography = styled(Typography)`
   margin: unset !important;
@@ -75,10 +77,10 @@ const WrapAstronaut = styled.div`
   flex-basis: 50%;
   overflow: hidden;
   @media (orientation: landscape) {
-    flex-basis: 60%;
+    flex-basis: 40%;
   }
-  @media (orientation: landscape) and (min-width: 1500px) {
-    flex-basis: 75%;
+  @media (orientation: landscape) and (min-width: 1700px) {
+    flex-basis: 50%;
   }
 `
 
@@ -196,6 +198,9 @@ const Welcome = (props) => {
     console.log(inSpace)
   }
 
+  const navigate = useNavigate();
+  const handleOnNaviClick = useCallback(() => navigate('/navigation', {replace: true}), [navigate]);
+
   useEffect(() => {
     const calcTime = () => {
       const endTime = new Date('2020-04-01 12:34:00').getTime()
@@ -293,7 +298,8 @@ const Welcome = (props) => {
             <Button
               color="primary"
               variant="outlined"
-              onClick={changeTheme}
+              component={Link}
+              to="/navigation"
               style={inSpace ? { color: 'white' } : { color: 'black' }}
               title="NAVIGATE">
             </Button>
