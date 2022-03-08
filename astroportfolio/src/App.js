@@ -6,6 +6,8 @@ import Layout from './components/Layout/Layout'
 import NotFound from './pages/404/404'
 import Welcome from './pages/Welcome/Welcome'
 import Navigation from './pages/Navigation/Navigation'
+import Skills from './pages/Skills/Skills'
+import Projects from './pages/Projects/Projects'
 import { ThemeProvider } from 'styled-components'
 import {
   createTheme,
@@ -108,6 +110,8 @@ function App() {
         <Routes>
           <Route path="/welcome" element={<Welcome speed={0.25} />} />
           <Route path="/navigation" element={<Navigation speed={0.25} />} />
+          <Route path="/skills" element={<Skills speed={0.25} />} />
+          <Route path="/projects" element={<Projects speed={0.25} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

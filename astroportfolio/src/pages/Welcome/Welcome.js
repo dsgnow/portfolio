@@ -43,7 +43,7 @@ const StyledStarTheme = styled.div`
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
   min-width: 320px;
   min-height: 500px;
@@ -246,11 +246,6 @@ const Welcome = (props) => {
   return (
     <>
       <Wrapper>
-        {inSpace && (
-          <StyledStarTheme style={{ position: 'absolute' }}>
-            <StarTheme key={themeSpeed} speed={themeSpeed}></StarTheme>
-          </StyledStarTheme>
-        )}
         <WrapTexts>
           <Box sx={{ mt: 4 }}>
             <StyledTypography
@@ -296,6 +291,7 @@ const Welcome = (props) => {
               to become front end developer
             </StyledTypography>
             <Button
+              size="large"
               color="primary"
               variant="outlined"
               component={Link}
@@ -315,11 +311,6 @@ const Welcome = (props) => {
               {!inSpace && <CircleImg src={circle} alt="circle" />}
               <AstronautImg src={astronaut} alt="astronaut" />
               <PlanetImg src={planet} alt="planet" />
-            {!inSpace && (
-              <StyledStarTheme>
-                <StarTheme key={themeSpeed} speed={themeSpeed}></StarTheme>
-              </StyledStarTheme>
-            )}
           </Astronaut>
         </WrapAstronaut>
       </Wrapper>

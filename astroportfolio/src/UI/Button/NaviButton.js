@@ -12,7 +12,7 @@ const StyledNaviButton = styled(Button)`
   font-weight: bold;
   text-transform: uppercase;
   color: white;
-  background: #2d0200;
+  background: #0e0f15;
   border: 2px solid #ff3000;
   box-shadow: 0 0 0 2px #000000;
   box-sizing: border-box;
@@ -45,6 +45,7 @@ const StyledNaviButton = styled(Button)`
 
   &:hover::after, &:hover::before {
     transform: translate(0, 0);
+    background-color: #ff3000;
   }
 
   &:focus {

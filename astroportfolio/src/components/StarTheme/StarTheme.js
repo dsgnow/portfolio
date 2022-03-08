@@ -65,6 +65,8 @@ const StarTheme = (props) => {
       };
 
       //Canvas and settings
+      let vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
       let canvas = document.getElementById("canvas"),
         context = canvas.getContext("2d"),
         width = canvas.width = window.innerWidth,

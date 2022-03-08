@@ -9,20 +9,16 @@ import frame from "../../Assets/Images/frame.svg";
 import styled from "styled-components";
 import Button from '../../UI/Button/Button'
 import NaviButton from '../../UI/Button/NaviButton'
-import { useNavigate } from "react-router-dom";
-
-const StyledStarTheme = styled.div`
-  left: 0;
-  top: 0;
-  z-index: -1;
-`
+import { Link, useNavigate } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+import NaviStickyButton from "../../UI/Button/NaviStickyButton";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
   max-width: 1920px;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   justify-content: center;
   overflow: hidden;
   @media(orientation: landscape) {
@@ -30,26 +26,8 @@ const Wrapper = styled.div`
   }
 `
 
-const WrapTexts = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-basis: 30%;
-  justify-content: center;
-  align-items: center;
-  @keyframes changeOpacity {
-    100% {
-      opacity: 100%;
-    }
-  }
-`
-
-const StyledButton = styled(Button)`
-  color: white;
-  animation-delay: 0s;
-`
-
 const StyledNaviButton = styled(NaviButton)`
-  @media (min-width: 700px) {
+  @media (min-width: 900px) {
     flex-basis: 40%;
   }
 `
@@ -57,7 +35,6 @@ const StyledNaviButton = styled(NaviButton)`
 const WrapNavi = styled.div`
   display: flex;
   flex-direction: row;
-  flex-basis: 80%;
   justify-content: center;
   align-items: flex-end;
   @media (orientation: landscape) {
@@ -76,19 +53,25 @@ const WrapConsole = styled.div`
 `
 
 const ShipDisplay = styled.div`
+  @keyframes show {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 100%;
+    }
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   flex-wrap: wrap;
-  //border-style: solid;
-  //border-width: 2px;
-  //border-color: #6b1600;
-  //border-radius: 2px;
-  padding: 100px;
+  padding: 100px 70px;
   background-size: 100% 100%;
   gap: 30px;
   width: 100%;
   transform: scale(0.9);
+  animation: show 3s both 0.5s;
   @media (min-height: 800px) {
     gap: 50px;
   }
@@ -108,7 +91,9 @@ const ShipDisplay = styled.div`
 
 const ConsoleImg = styled.img`
   width: 90%;
+  bottom: 0;
   display: none;
+  animation: fadeIn 1s both;
   @media (min-height: 700px) {
     display: block;
   }
@@ -121,10 +106,20 @@ const ConsoleImg = styled.img`
 `
 
 const Cocpit = styled.div`
+  @keyframes fadeIn {
+    0% {
+      transform: translateY(100%);
+    }
+
+    100% {
+      transform: translateY(0%);
+    }
+  }
   display: flex;
   justify-content: center;
   width: 100%;
   position: relative;
+  animation: fadeIn 1s both;
   @media (min-height: 900px) and (orientation: landscape) {
     height: 300px;
   }
@@ -168,6 +163,24 @@ const ChairRightImg = styled.img`
   }
 `
 
+const WrapTitle = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  animation: showTechnology 1s both;
+  display: none;
+  @media (orientation: landscape) and (min-width: 1000px) {
+    display: block;
+  }
+`
+
+const Title = styled(Typography)`
+  color: white;
+  animation: show 3s both 1s;
+  span.primary {
+    color: ${({ theme }) => theme.palette.primary.main};
+  }
+`
+
 function Navigation(props) {
   const { speed } = props
   const [themeSpeed, setThemeSpeed] = useState(speed)
@@ -176,32 +189,27 @@ function Navigation(props) {
 
   return (
     <>
-      <StyledStarTheme style={{ position: 'absolute' }}>
-        <StarTheme key={themeSpeed} speed={0.25}></StarTheme>
-      </StyledStarTheme>
       <Wrapper>
-        <WrapTexts>
-          <Box sx={{ m: 2 }}>
-            <StyledButton
-              color="default"
-              variant="outlined"
-              title="ABORT NAVI"
-              onClick={() => navigate(-1)}>
-            </StyledButton>
-          </Box>
-        </WrapTexts>
+        <NaviStickyButton onClick={() => navigate(-1)} route="" title="Exit"></NaviStickyButton>
+        <WrapTitle>
+          <Title variant="h2">Navigation </Title>
+        </WrapTitle>
         <WrapNavi>
           <WrapConsole>
             <ShipDisplay style={{ backgroundImage: `url(${frame}) ` }}>
               <StyledNaviButton
                 color="default"
                 variant="outlined"
-                title="Skills">
+                title="Skills"
+                component={Link}
+                to="/skills">
               </StyledNaviButton>
               <StyledNaviButton
                 color="default"
                 variant="outlined"
-                title="Projects">
+                title="Projects"
+                component={Link}
+                to="/projects">>
               </StyledNaviButton>
               <StyledNaviButton
                 color="default"
@@ -212,6 +220,13 @@ function Navigation(props) {
                 color="default"
                 variant="outlined"
                 title="Contact">
+              </StyledNaviButton>
+              <StyledNaviButton
+                color="default"
+                variant="outlined"
+                title="Start"
+                component={Link}
+                to="/welcome">
               </StyledNaviButton>
             </ShipDisplay>
             <ConsoleImg src={console} alt="console" />
