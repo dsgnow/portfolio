@@ -1,13 +1,8 @@
-import { useState, useEffect } from "react";
-import StarTheme from '../../components/StarTheme/StarTheme'
-import Box from "@mui/material/Box";
-import monitor from "../../Assets/Images/monitor.svg";
 import console from "../../Assets/Images/console.svg";
 import cocpit from "../../Assets/Images/cocpit.svg";
 import chair from "../../Assets/Images/chair.svg";
 import frame from "../../Assets/Images/frame.svg";
 import styled from "styled-components";
-import Button from '../../UI/Button/Button'
 import NaviButton from '../../UI/Button/NaviButton'
 import { Link, useNavigate } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
@@ -23,6 +18,9 @@ const Wrapper = styled.div`
   overflow: hidden;
   @media(orientation: landscape) {
     justify-content: flex-end;
+  }
+  @media(orientation: landscape) and (min-height: 800px) and (width: 1000px) {
+    height: 100%;
   }
 `
 
@@ -182,17 +180,18 @@ const Title = styled(Typography)`
 `
 
 function Navigation(props) {
-  const { speed } = props
-  const [themeSpeed, setThemeSpeed] = useState(speed)
+  const { changeStarSpeed } = props
 
   const navigate = useNavigate();
+
+  // changeStarSpeed(20)
 
   return (
     <>
       <Wrapper>
         <NaviStickyButton onClick={() => navigate(-1)} route="" title="Exit"></NaviStickyButton>
         <WrapTitle>
-          <Title variant="h2">Navigation </Title>
+          <Title variant="h1">Navigation </Title>
         </WrapTitle>
         <WrapNavi>
           <WrapConsole>
@@ -214,19 +213,23 @@ function Navigation(props) {
               <StyledNaviButton
                 color="default"
                 variant="outlined"
-                title="About">
+                title="About"
+                component={Link}
+                to="/about">
               </StyledNaviButton>
               <StyledNaviButton
                 color="default"
                 variant="outlined"
-                title="Contact">
+                title="Contact"
+                component={Link}
+                to="/contact">
               </StyledNaviButton>
               <StyledNaviButton
                 color="default"
                 variant="outlined"
                 title="Start"
                 component={Link}
-                to="/welcome">
+                to="/">
               </StyledNaviButton>
             </ShipDisplay>
             <ConsoleImg src={console} alt="console" />

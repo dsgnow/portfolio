@@ -163,22 +163,9 @@ const PlanetImg = styled.img`
 `
 
 const StyledButton = styled(Button)`
-  border-radius: 50px;
-  margin-top: 20px;
-  color: black;
-  letter-spacing: 2px;
-  transition: 0.5s;
-  border-width: 2px;
-  border-color: ${({ theme }) => theme.palette.primary.main};
   opacity: 0;
   animation: changeOpacity 1s ease-in-out 1 forwards;
   animation-delay: 1.7s;
-  z-index: 999;
-  &:hover {
-    border-width: 2px;
-    color: white !important;
-    background-color: ${({ theme }) => theme.palette.primary.main};
-  }
 `
 
 const Welcome = (props) => {
@@ -195,7 +182,6 @@ const Welcome = (props) => {
 
   const changeTheme = () => {
     setInSpace(!inSpace)
-    console.log(inSpace)
   }
 
   const navigate = useNavigate();
@@ -203,7 +189,7 @@ const Welcome = (props) => {
 
   useEffect(() => {
     const calcTime = () => {
-      const endTime = new Date('2020-04-01 12:34:00').getTime()
+      const endTime = new Date('2020/04/01').getTime()
       const nowTime = new Date().getTime()
 
       const months = Math.floor(
@@ -290,15 +276,15 @@ const Welcome = (props) => {
               variant="h5">
               to become front end developer
             </StyledTypography>
-            <Button
+            <StyledButton
               size="large"
               color="primary"
               variant="outlined"
               component={Link}
               to="/navigation"
-              style={inSpace ? { color: 'white' } : { color: 'black' }}
+              style={{ color: 'white', animationDelay: '1.7s' }}
               title="NAVIGATE">
-            </Button>
+            </StyledButton>
           </Box>
         </WrapTexts>
         <WrapAstronaut>

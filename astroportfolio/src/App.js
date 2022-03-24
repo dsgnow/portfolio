@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -8,12 +8,15 @@ import Welcome from './pages/Welcome/Welcome'
 import Navigation from './pages/Navigation/Navigation'
 import Skills from './pages/Skills/Skills'
 import Projects from './pages/Projects/Projects'
+import About from './pages/About/About'
+import Contact from './pages/Contact/Contact'
 import { ThemeProvider } from 'styled-components'
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
   responsiveFontSizes
 } from '@material-ui/core/styles'
+import { useDebouncedCallback } from 'use-debounce';
 
 let theme = createTheme({
   typography: {
@@ -103,15 +106,28 @@ theme.typography.h5 = {
 }
 
 function App() {
+  const[starSpeed, setStarSpeed] = useState(0.05);
+  const[reloadOnResize, setReloadOnResize] = useState(true);
+
+  const reloadCanvasOnResize = useDebouncedCallback(
+    () => {
+      setReloadOnResize(!reloadOnResize)
+    },
+    200
+  );
+  window.addEventListener('resize', reloadCanvasOnResize)
+
   const header = <div></div>
   const content = (
     <main>
       <Suspense fallback={<p>Ładowanie...</p>}>
         <Routes>
-          <Route path="/welcome" element={<Welcome speed={0.25} />} />
-          <Route path="/navigation" element={<Navigation speed={0.25} />} />
-          <Route path="/skills" element={<Skills speed={0.25} />} />
-          <Route path="/projects" element={<Projects speed={0.25} />} />
+          <Route path="/" element={<Welcome changeStarSpeed={setStarSpeed} />} />
+          <Route path="/navigation" element={<Navigation changeStarSpeed={setStarSpeed} />} />
+          <Route path="/skills" element={<Skills changeStarSpeed={setStarSpeed} />} />
+          <Route path="/projects" element={<Projects changeStarSpeed={setStarSpeed} />} />
+          <Route path="/about" element={<About changeStarSpeed={setStarSpeed} />} />
+          <Route path="/contact" element={<Contact changeStarSpeed={setStarSpeed} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
@@ -124,7 +140,7 @@ function App() {
         <MuiThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Layout header={header} content={content} />
+            <Layout reloadOnResize={reloadOnResize} speed={starSpeed} header={header} content={content} />
           </ThemeProvider>
         </MuiThemeProvider>
       </Router>

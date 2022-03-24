@@ -71,7 +71,7 @@ const Mock = styled.div`
 const MockImg = styled.img`
   height: 80%;
   z-index: 1;
-  animation: show 2s both 0.5s;
+  animation: show 2s both 0.3s;
   @media(orientation: landscape) and (min-height: 500px) and (min-width: 1000px){
     height: unset;
     width: 40%;
@@ -344,7 +344,7 @@ const Projects = () => {
       <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
         <Background>
           <CornerImg src={spaceCorner} alt="space with planet"></CornerImg>
-        <Wrapper key={projectIndex}>
+          <Wrapper key={projectIndex}>
           <Mock>
             <Header>{projects[projectIndex].header}</Header>
             <MockImg src={projects[projectIndex].image} alt="project presentation" />

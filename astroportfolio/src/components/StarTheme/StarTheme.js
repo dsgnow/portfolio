@@ -1,9 +1,9 @@
+import styled from "styled-components";
+
 const { useEffect } = require('react')
 const StarTheme = (props) => {
-  const speed = 0.25
 
   useEffect(() => {
-
     function start() {
 
       //Helpers
@@ -98,7 +98,7 @@ const StarTheme = (props) => {
         for (let i = 0; i < layer.count; i += 1) {
           const star = particle.create(randomRange(0, width), randomRange(0, height), 0, 0);
           star.radius = starBaseRadius * layer.scale;
-          star.setSpeed(layer.speed);
+          star.setSpeed(props.speed);
           star.setHeading(degreesToRads(starsAngle));
           stars.push(star);
         }
@@ -247,19 +247,19 @@ const StarTheme = (props) => {
         paused = true;
       };
     }
-
     start()
+  }, [props.speed, props.reloadOnResize])
 
-    const reloadCanvasOnResize = () => {
-      window.location.reload(true)
-    }
-    window.addEventListener('resize', reloadCanvasOnResize)
-  }, [])
-
+  const StyledStarTheme = styled.canvas`
+  left: 0;
+  top: 0;
+  z-index: -1;
+  position: absolute;
+`
   return (
-    <div>
-      <canvas id="canvas"></canvas>
-    </div>
+    <>
+      <StyledStarTheme id="canvas"></StyledStarTheme>
+    </>
   )
 }
 

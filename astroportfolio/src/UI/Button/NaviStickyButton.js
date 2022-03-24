@@ -21,12 +21,15 @@ const NaviButton = styled(Button)`
   transition: 0.3s;
   font-size: 14px;
   &:hover {
-    background-color: white;
-    border-color: ${({ theme }) => theme.palette.primary.main};
-    color: ${({ theme }) => theme.palette.primary.main};
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: white;
   }
   &.onWhite {
     color: ${({ theme }) => theme.palette.primary.main};
+    &:hover {
+      background-color: ${({ theme }) => theme.palette.primary.main};
+      color: white;
+    }
   }
 `
 const NaviStickyButton = (props) => {

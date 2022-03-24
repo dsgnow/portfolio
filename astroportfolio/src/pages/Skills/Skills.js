@@ -1,5 +1,3 @@
-import { useState } from "react";
-import StarTheme from '../../components/StarTheme/StarTheme'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NaviStickyButton from '../../UI/Button/NaviStickyButton'
 import {faReact, faVuejs, faHtml5, faCss3, faAngular, faSass, faGit} from "@fortawesome/free-brands-svg-icons";
@@ -9,12 +7,6 @@ import cloud3 from "../../Assets/Images/grey3Right.svg";
 import cloud4 from "../../Assets/Images/grey4Right.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
-
-const StyledStarTheme = styled.div`
-  left: 0;
-  top: 0;
-  z-index: -1;
-`
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -79,6 +71,9 @@ const WrapTitle = styled.div`
   display: flex;
   gap: 10px;
   animation: showTechnology 3s both 2s;
+  @media (orientation: landscape) {
+    padding-bottom: 30px;
+  }
   @media (orientation: landscape) and (min-width: 1000px) {
     padding-bottom: 70px;
   }
@@ -112,9 +107,13 @@ const SkillName = styled(Typography)`
 `
 
 const Title = styled(Typography)`
+  font-size: 30px;
   color: white;
   &.primary {
     color: ${({ theme }) => theme.palette.primary.main};
+  }
+  @media(orientation: landscape) and (min-width: 1000px) {
+    font-size: 70px;
   }
 `
 
@@ -211,9 +210,7 @@ const CloudImg4 = styled.img`
   }
 `
 
-function Skills(props) {
-  const { speed } = props
-  const [themeSpeed] = useState(speed)
+function Skills() {
 
   const skills = [
     {icon: faReact, name: 'React', level: 'Junior', key: 1},
@@ -232,8 +229,8 @@ function Skills(props) {
       <RocksImg src={rocks} alt="rocks" />
       <Wrapper>
         <WrapTitle>
-          <Title variant="h2">Technology </Title>
-          <Title className={"primary"} variant="h2">stack </Title>
+          <Title variant="h1">Technology </Title>
+          <Title className={"primary"} variant="h1">stack </Title>
         </WrapTitle>
         <Technology>
           {skills.map((skill) =>

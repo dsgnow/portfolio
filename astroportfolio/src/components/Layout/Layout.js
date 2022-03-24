@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import StarTheme from "../StarTheme/StarTheme";
 import rocks from "../../Assets/Images/rocks.svg";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,19 +11,16 @@ const Wrapper = styled.div`
   max-width: 1920px;
   height: calc(var(--vh, 1vh) * 100);
   margin: 0 auto;
+  @media(orientation: landscape) and (min-height: 800px) and (width: 1000px) {
+    height: 100%;
+    overflow: hidden;
+  }
 `
 
-const StyledStarTheme = styled.div`
-  left: 0;
-  top: 0;
-  z-index: -1;
-`
 function Layout(props) {
   return (
     <Wrapper>
-      <StyledStarTheme style={{ position: 'absolute' }}>
-        <StarTheme speed={0.25}></StarTheme>
-      </StyledStarTheme>
+      <StarTheme reloadOnResize={props.reloadOnResize} speed={props.speed}></StarTheme>
       {props.header}
       {/* <div className="container">{props.menu}</div> */}
       {props.content}
@@ -33,7 +31,8 @@ function Layout(props) {
 
 Layout.propTypes = {
   header: PropTypes.object.isRequired,
-  content: PropTypes.object.isRequired
+  content: PropTypes.object.isRequired,
+  speed: PropTypes.number.isRequired
 }
 
 export default Layout
