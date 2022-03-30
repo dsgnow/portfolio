@@ -213,13 +213,13 @@ const CloudImg4 = styled.img`
 function Skills() {
 
   const skills = [
-    {icon: faReact, name: 'React', level: 'Junior', key: 1},
-    {icon: faAngular, name: 'Angular', level: 'Junior', key: 2},
-    {icon: faVuejs, name: 'Vue', level: 'Junior', key: 3},
-    {icon: faHtml5, name: 'Html5', level: 'Mid', key: 4},
-    {icon: faCss3, name: 'Css3', level: 'Senior', key: 5},
-    {icon: faSass, name: 'Sass', level: 'Mid', key: 6},
-    {icon: faGit, name: 'Git', level: 'Mid', key: 7},
+    {icon: faReact, name: 'React', level: '', key: 1},
+    {icon: faAngular, name: 'Angular', level: '', key: 2},
+    {icon: faVuejs, name: 'Vue', level: '', key: 3},
+    {icon: faHtml5, name: 'Html5', level: '', key: 4},
+    {icon: faCss3, name: 'Css3', level: '', key: 5},
+    {icon: faSass, name: 'Sass', level: '', key: 6},
+    {icon: faGit, name: 'Git', level: '', key: 7},
   ]
 
 

@@ -1,13 +1,16 @@
 import React from "react";
 import piotr from "../../Assets/Images/piotr.png";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import NaviStickyButton from "../../UI/Button/NaviStickyButton";
-import chair from "../../Assets/Images/chair.svg";
 import spaceCorner from "../../Assets/Images/aboutTop.png";
 import NaviButton from "../../UI/Button/NaviButton";
 import { Button } from '@material-ui/core'
+import grey1Right from "../../Assets/Images/grey1Right.svg";
+import grey2Right from "../../Assets/Images/grey2Right.svg";
+import grey3Right from "../../Assets/Images/grey3Right.svg";
+import grey4Right from "../../Assets/Images/grey4Right.svg";
 
 const Background = styled.div`
   background-color: white;
@@ -72,6 +75,9 @@ const WrapTexts = styled.div`
   @media(orientation: landscape) and (min-width: 1500px){
     width: 50%;
   }
+  @media(orientation: landscape) and (min-width: 2200px){
+    margin-left: 150px;
+  }
 `
 
 const CornerImg = styled.img`
@@ -96,7 +102,7 @@ const PiotrImg = styled.img`
   width: 80%;
   @media(orientation: portrait) and (min-height: 500px){
     width: unset;
-    max-height: 30%;
+    max-width: 100%;
   }
   @media(orientation: landscape){
     width: unset;
@@ -118,7 +124,7 @@ const Description = styled(Typography)`
   animation: show 2s both 0.5s;
   max-height: 250px;
   overflow: auto;
-  margin: 20px;
+  margin: 20px 0;
   text-align: left;
   @media (min-height: 700px) {
     max-height: 250px;
@@ -126,6 +132,9 @@ const Description = styled(Typography)`
   @media (min-height: 800px) {
     max-height: unset;
     overflow: unset;
+  }
+  @media (orientation: landscape) {
+    margin: 20px;
   }
   @media (orientation: landscape) and (min-height: 800px) {
     max-height: unset;
@@ -136,12 +145,6 @@ const Description = styled(Typography)`
     max-height: unset;
     overflow: unset;
     margin-top: 50px;
-  }
-`
-
-const StyledNaviButton = styled(NaviButton)`
-  @media (min-width: 900px) {
-    flex-basis: 40%;
   }
 `
 
@@ -169,12 +172,56 @@ const ContactButton = styled(Button)`
   }
 `
 
+const CloudsImg = styled.img`
+    //@keyframes greyCloudsStaticRight {
+    //  0% {
+    //    opacity: 0;
+    //    transform: translate(0, 0);
+    //  }
+    //
+    //
+    //  60% {
+    //    opacity: .9;
+    //    transform: translate(-3%, 1%);
+    //  }
+    //
+    //  100% {
+    //    opacity: 0;
+    //    transform: translate(-2%, 0);
+    //  }
+    //}
+    &.grey1Right {
+      animation: greyCloudsStaticRight 4s infinite;
+    }
+    &.grey2Right {
+      animation: greyCloudsStaticRight 7s infinite;
+    }
+    &.grey3Right {
+      animation: greyCloudsStaticRight 10s infinite;
+    }
+    &.grey4Right {
+      animation: greyCloudsStaticRight 13s infinite;
+    }
+  z-index: -2;
+  display: none;
+  @media(orientation: landscape) and (min-height: 500px) and (min-width: 1000px){
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+`
+
 const About = () => {
   return (
   <>
     <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
     <Background>
       <CornerImg src={spaceCorner} alt="space with planet"></CornerImg>
+      <CloudsImg className={"grey1Right"} src={grey1Right} alt="clouds"/>
+      <CloudsImg className={"grey2Right"} src={grey2Right} alt="clouds"/>
+      <CloudsImg className={"grey3Right"} src={grey3Right} alt="clouds"/>
+      <CloudsImg className={"grey4Right"} src={grey4Right} alt="clouds"/>
       <Wrapper>
         <WrapImage>
         </WrapImage>

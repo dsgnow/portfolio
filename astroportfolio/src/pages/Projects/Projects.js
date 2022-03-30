@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import NaviStickyButton from '../../UI/Button/NaviStickyButton'
 import styled from "styled-components";
-import mock from "../../Assets/Images/mock.png";
 import mockHair from "../../Assets/Images/mockHair.png";
 import trainer from "../../Assets/Images/trainer.png";
 import prepress from "../../Assets/Images/prepress.png";
@@ -9,11 +8,14 @@ import volley from "../../Assets/Images/volley.png";
 import print from "../../Assets/Images/print.png";
 import spaceCorner from "../../Assets/Images/corner.svg";
 import dietitian from "../../Assets/Images/dietitian.png";
+import grey1Left from "../../Assets/Images/grey1Left.svg";
+import grey2Left from "../../Assets/Images/grey2Left.svg";
+import grey3Left from "../../Assets/Images/grey3Left.svg";
+import grey4Left from "../../Assets/Images/grey4Left.svg";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -145,7 +147,7 @@ const WrapTitle = styled.div`
 `
 
 const Title = styled(Typography)`
-  color: black;
+  color: #0e0f15;
   &.primary {
     color: ${({ theme }) => theme.palette.primary.main};
   }
@@ -193,7 +195,7 @@ const LinkButton = styled(Button)`
   font-size: 1rem;
   font-weight: bold;
   & a {
-    color: black;
+    color: #0e0f15;
     text-decoration: none;
   }
 `
@@ -222,7 +224,7 @@ const WrapSlider = styled.div`
     width: 70%;
     transition: 0.3s;
     & p {
-      color: black;
+      color: #0e0f15;
     }
     & .arrow {
       cursor: pointer;
@@ -249,6 +251,46 @@ const Background = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+`
+
+const CloudsImg = styled.img`
+    //@keyframes greyCloudsStaticLeft {
+    //  0% {
+    //    opacity: 0;
+    //    transform: translate(0, 0);
+    //  }
+    //
+    //
+    //  60% {
+    //    opacity: .9;
+    //    transform: translate(-3%, 1%);
+    //  }
+    //
+    //  100% {
+    //    opacity: 0;
+    //    transform: translate(-2%, 0);
+    //  }
+    //}
+    &.grey1Left {
+      animation: greyCloudsStaticLeft 4s infinite;
+    }
+    &.grey2Left {
+      animation: greyCloudsStaticLeft 7s infinite;
+    }
+    &.grey3Left {
+      animation: greyCloudsStaticLeft 10s infinite;
+    }
+    &.grey4Left {
+      animation: greyCloudsStaticLeft 13s infinite;
+    }
+  z-index: -1;
+  display: none;
+  @media(orientation: landscape) and (min-height: 500px) and (min-width: 1000px){
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 `
 
@@ -341,9 +383,13 @@ const Projects = () => {
   ]
   return (
     <>
-      <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
+      <NaviStickyButton className="onWhite" route="/navigation" title="Navi"/>
         <Background>
-          <CornerImg src={spaceCorner} alt="space with planet"></CornerImg>
+          <CornerImg src={spaceCorner} alt="space with planet"/>
+          <CloudsImg className={"grey1Left"} src={grey1Left} alt="clouds"/>
+          <CloudsImg className={"grey2Left"} src={grey2Left} alt="clouds"/>
+          <CloudsImg className={"grey3Left"} src={grey3Left} alt="clouds"/>
+          <CloudsImg className={"grey4Left"} src={grey4Left} alt="clouds"/>
           <Wrapper key={projectIndex}>
           <Mock>
             <Header>{projects[projectIndex].header}</Header>

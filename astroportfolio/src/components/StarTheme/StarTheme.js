@@ -250,15 +250,9 @@ const StarTheme = (props) => {
     start()
   }, [props.speed, props.reloadOnResize])
 
-  const StyledStarTheme = styled.canvas`
-  left: 0;
-  top: 0;
-  z-index: -1;
-  position: absolute;
-`
   return (
     <>
-      <StyledStarTheme id="canvas"></StyledStarTheme>
+      <canvas id="canvas"></canvas>
     </>
   )
 }

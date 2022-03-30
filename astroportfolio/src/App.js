@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -22,7 +22,7 @@ let theme = createTheme({
   typography: {
     htmlFontSize: 10,
     allVariants: {
-      color: 'black'
+      color: '#0e0f15'
     },
     fontFamily: [
       'Nunito',
@@ -111,11 +111,19 @@ function App() {
 
   const reloadCanvasOnResize = useDebouncedCallback(
     () => {
+      let canvas = document.getElementById("canvas")
+      canvas.getContext("2d")
+      canvas.width = 0
+      canvas.height = 0
       setReloadOnResize(!reloadOnResize)
     },
     200
   );
-  window.addEventListener('resize', reloadCanvasOnResize)
+
+  useEffect(() => {
+    window.addEventListener('resize', reloadCanvasOnResize)
+    return () => window.removeEventListener("resize", reloadCanvasOnResize);
+  })
 
   const header = <div></div>
   const content = (

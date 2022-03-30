@@ -14,12 +14,11 @@ const StyledTitleTypography = styled(Typography)`
   margin: unset !important;
   font-weight: bold;
   white-space: nowrap;
-  font-size: 3rem;
   &.white {
     color: white !important;
   }
-  @media (orientation: landscape) {
-    font-size: 2rem;
+  @media (orientation: landscape) and (max-width: 700px) {
+   font-size: 2rem;
   }
   ${({ theme }) => `s
    ${theme.breakpoints.up('sm')} {
@@ -33,12 +32,6 @@ const StyledTypography = styled(Typography)`
   &.white {
     color: white !important;
   }
-`
-
-const StyledStarTheme = styled.div`
-  left: 0;
-  top: 0;
-  z-index: -1;
 `
 
 const Wrapper = styled.div`
@@ -88,7 +81,7 @@ const Astronaut = styled.div`
   position: relative;
   bottom: 50%;
   left: 50%;
-  transform: translate(-50%, 10%);
+  transform: translate(-50%, 0%);
   overflow: hidden;
   width: 151vw;
   height: 151vw;
@@ -235,7 +228,7 @@ const Welcome = (props) => {
         <WrapTexts>
           <Box sx={{ mt: 4 }}>
             <StyledTypography
-              className={inSpace ? 'white' : 'black'}
+              className={inSpace ? 'white' : '#0e0f15'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -245,7 +238,7 @@ const Welcome = (props) => {
               mission duration:
             </StyledTypography>
             <StyledTypography
-              className={inSpace ? 'white' : 'black'}
+              className={inSpace ? 'white' : '#0e0f15'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -257,7 +250,7 @@ const Welcome = (props) => {
           </Box>
           <Box sx={{ m: 2 }}>
             <StyledTitleTypography
-              className={inSpace ? 'white' : 'black'}
+              className={inSpace ? 'white' : '#0e0f15'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -267,7 +260,7 @@ const Welcome = (props) => {
               MY JOURNEY
             </StyledTitleTypography>
             <StyledTypography
-              className={inSpace ? 'white' : 'black'}
+              className={inSpace ? 'white' : '#0e0f15'}
               style={{
                 opacity: 0,
                 animation: 'changeOpacity 1s ease-in-out 1 forwards',
@@ -292,7 +285,7 @@ const Welcome = (props) => {
             style={
               inSpace
                 ? { backgroundColor: 'transparent' }
-                : { backgroundColor: 'black' }
+                : { backgroundColor: '#0e0f15' }
             }>
               {!inSpace && <CircleImg src={circle} alt="circle" />}
               <AstronautImg src={astronaut} alt="astronaut" />
