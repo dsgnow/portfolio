@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import NaviStickyButton from "../../UI/Button/NaviStickyButton";
 import spaceCorner from "../../Assets/Images/aboutTop.png";
-import NaviButton from "../../UI/Button/NaviButton";
 import { Button } from '@material-ui/core'
 import grey1Right from "../../Assets/Images/grey1Right.svg";
 import grey2Right from "../../Assets/Images/grey2Right.svg";

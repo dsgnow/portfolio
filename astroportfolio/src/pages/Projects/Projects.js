@@ -263,7 +263,7 @@ const CloudsImg = styled.img`
     //
     //
     //  60% {
-    //    opacity: .9;
+    //    opacity: .9;changeStarSpeed
     //    transform: translate(-3%, 1%);
     //  }
     //

@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import StarTheme from "../StarTheme/StarTheme";
-import rocks from "../../Assets/Images/rocks.svg";
-import { useState } from "react";
 
 const Wrapper = styled.div`
   display: flex;

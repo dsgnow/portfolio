@@ -2,13 +2,11 @@ import styled from 'styled-components'
 import Button from '../../UI/Button/Button'
 import Typography from '@material-ui/core/Typography'
 import { useState, useEffect } from 'react'
-import StarTheme from '../../components/StarTheme/StarTheme'
 import Box from '@mui/material/Box'
 import circle from '../../Assets/Images/circle.png'
 import astronaut from '../../Assets/Images/astronaut.png'
 import planet from '../../Assets/Images/planet1.png'
-import React, { useCallback } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const StyledTitleTypography = styled(Typography)`
   margin: unset !important;
@@ -161,10 +159,8 @@ const StyledButton = styled(Button)`
   animation-delay: 1.7s;
 `
 
-const Welcome = (props) => {
-  const { speed } = props
-  const [themeSpeed, setThemeSpeed] = useState(speed)
-  const [inSpace, setInSpace] = useState(true)
+const Welcome = () => {
+  const [inSpace] = useState(true)
   const [time, setTime] = useState({
     months: '',
     days: '',
@@ -172,13 +168,6 @@ const Welcome = (props) => {
     minutes: '',
     seconds: ''
   })
-
-  const changeTheme = () => {
-    setInSpace(!inSpace)
-  }
-
-  const navigate = useNavigate();
-  const handleOnNaviClick = useCallback(() => navigate('/navigation', {replace: true}), [navigate]);
 
   useEffect(() => {
     const calcTime = () => {
