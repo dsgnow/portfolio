@@ -440,8 +440,12 @@ function Contact() {
             <WrapFooterIcons>
               <LogoImg src={logo} alt="creative code logo">
               </LogoImg>
-              <StyledIcon icon={faFacebook} size="lg" style={{color: "#0e0f15"}}/>
-              <StyledIcon icon={faLinkedin} size="lg" style={{color: "#0e0f15"}}/>
+              <a href={'https://www.facebook.com/piotr.stachowicz.5'} target="_blank"  rel="noreferrer">
+                <StyledIcon icon={faFacebook} size="lg" style={{color: "#0e0f15"}}/>
+              </a>
+              <a href={'https://www.linkedin.com/in/piotr-stachowicz-25a662160/'} target="_blank"  rel="noreferrer">
+                <StyledIcon icon={faLinkedin} size="lg" style={{color: "#0e0f15"}}/>
+              </a>
             </WrapFooterIcons>
           <WrapTexts>
             <StyledTypography variant="h2">Let's be in touch </StyledTypography>

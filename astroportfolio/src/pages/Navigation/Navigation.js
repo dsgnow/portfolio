@@ -179,8 +179,8 @@ const Title = styled(Typography)`
   }
 `
 
-function Navigation(props) {
-  const { changeStarSpeed } = props
+function Navigation() {
+  // const { changeStarSpeed } = props
 
   const navigate = useNavigate();
 

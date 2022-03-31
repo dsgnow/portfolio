@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Button } from '@material-ui/core'
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import StyledButtonOk from "./Button";
 
 const NaviButton = styled(Button)`
   color: white;
