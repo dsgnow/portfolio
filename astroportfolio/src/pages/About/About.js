@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import piotr from "../../Assets/Images/piotr.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -212,20 +212,58 @@ const CloudsImg = styled.img`
 `
 
 const About = () => {
+  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
+  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
+  const imagesNumber = 6;
+
+  const checkLoadingImg = () => {
+    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
+    if (numberOfPreloadedImgs + 1 === imagesNumber) {
+      setImgsFullyLoaded(true);
+    }
+  }
   return (
   <>
     <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
     <Background>
-      <CornerImg src={spaceCorner} alt="space with planet"></CornerImg>
-      <CloudsImg className={"grey1Right"} src={grey1Right} alt="clouds"/>
-      <CloudsImg className={"grey2Right"} src={grey2Right} alt="clouds"/>
-      <CloudsImg className={"grey3Right"} src={grey3Right} alt="clouds"/>
-      <CloudsImg className={"grey4Right"} src={grey4Right} alt="clouds"/>
+      <CornerImg
+        style={imgsFullyLoaded ? {} : {display: 'none'}}
+        onLoad={() => checkLoadingImg()}
+        src={spaceCorner}
+        alt="space with planet"></CornerImg>
+      <CloudsImg
+        style={imgsFullyLoaded ? {} : {display: 'none'}}
+        onLoad={() => checkLoadingImg()}
+        className={"grey1Right"}
+        src={grey1Right}
+        alt="clouds"/>
+      <CloudsImg
+        style={imgsFullyLoaded ? {} : {display: 'none'}}
+        onLoad={() => checkLoadingImg()}
+        className={"grey2Right"}
+        src={grey2Right}
+        alt="clouds"/>
+      <CloudsImg
+        style={imgsFullyLoaded ? {} : {display: 'none'}}
+        onLoad={() => checkLoadingImg()}
+        className={"grey3Right"}
+        src={grey3Right}
+        alt="clouds"/>
+      <CloudsImg
+        style={imgsFullyLoaded ? {} : {display: 'none'}}
+        onLoad={() => checkLoadingImg()}
+        className={"grey4Right"}
+        src={grey4Right}
+        alt="clouds"/>
       <Wrapper>
         <WrapImage>
         </WrapImage>
         <WrapTexts>
-          <PiotrImg src={piotr} alt="invitation title"></PiotrImg>
+          <PiotrImg
+            style={imgsFullyLoaded ? {} : {display: 'none'}}
+            onLoad={() => checkLoadingImg()}
+            src={piotr}
+            alt="invitation title"></PiotrImg>
           <Description variants="description">
             Hello, my name is Piotr and I am glad that you are interested in my portfolio. I am a graphic designer by education, but I also develop as a frontend programmer. In my projects, I try to use the latest technologies and develop in new areas. If you like my projects, please contact me.
           </Description>

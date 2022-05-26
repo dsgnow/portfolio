@@ -16,6 +16,7 @@ import { Formik } from "formik";
 import emailjs from '@emailjs/browser';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useState } from "react";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -324,6 +325,17 @@ const FlexColumn = styled.div`
 `
 
 function Contact() {
+  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
+  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
+  const imagesNumber = 3;
+
+  const checkLoadingImg = () => {
+    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
+    if (numberOfPreloadedImgs + 1 === imagesNumber) {
+      setImgsFullyLoaded(true);
+    }
+  }
+
   const sendEmail = (values) => {
     const templateParams = {
       name: values.name,
@@ -429,10 +441,25 @@ function Contact() {
             </Formik>
           </ContactForm>
           <WrapImages>
-            <AstronautImg src={astronaut} alt="astronaut"></AstronautImg>
+            <AstronautImg
+              style={imgsFullyLoaded ? {} : {display: 'none'}}
+              onLoad={() => checkLoadingImg()}
+              src={astronaut}
+              alt="astronaut">
+            </AstronautImg>
             <WrapJobObject>
-              <JobObjectImg src={jobObject} alt="job object"></JobObjectImg>
-              <JobObjectTitleImg src={jobTitle} alt="job object title"></JobObjectTitleImg>
+              <JobObjectImg
+                style={imgsFullyLoaded ? {} : {display: 'none'}}
+                onLoad={() => checkLoadingImg()}
+                src={jobObject}
+                alt="job object">
+              </JobObjectImg>
+              <JobObjectTitleImg
+                style={imgsFullyLoaded ? {} : {display: 'none'}}
+                onLoad={() => checkLoadingImg()}
+                src={jobTitle}
+                alt="job object title">
+              </JobObjectTitleImg>
             </WrapJobObject>
           </WrapImages>
         </ContactWithImage>

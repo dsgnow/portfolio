@@ -168,6 +168,9 @@ const Welcome = () => {
     minutes: '',
     seconds: ''
   })
+  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
+  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
+  const imagesNumber = 2;
 
   useEffect(() => {
     const calcTime = () => {
@@ -211,77 +214,92 @@ const Welcome = () => {
     }
   }, [])
 
+  const checkLoadingImg = () => {
+    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
+    if (numberOfPreloadedImgs + 1 === imagesNumber) {
+      setImgsFullyLoaded(true);
+    }
+  }
+
   return (
     <>
-      <Wrapper>
-        <WrapTexts>
-          <Box sx={{ mt: 4 }}>
-            <StyledTypography
-              className={inSpace ? 'white' : '#0e0f15'}
-              style={{
-                opacity: 0,
-                animation: 'changeOpacity 1s ease-in-out 1 forwards',
-                animationDelay: '1.7s'
-              }}
-              variant="subtitle2">
-              mission duration:
-            </StyledTypography>
-            <StyledTypography
-              className={inSpace ? 'white' : '#0e0f15'}
-              style={{
-                opacity: 0,
-                animation: 'changeOpacity 1s ease-in-out 1 forwards',
-                animationDelay: '1.7s'
-              }}
-              variant="subtitle1">
-              {`${time.months} ${time.days} ${time.hours} ${time.minutes} ${time.seconds}`}
-            </StyledTypography>
-          </Box>
-          <Box sx={{ m: 2 }}>
-            <StyledTitleTypography
-              className={inSpace ? 'white' : '#0e0f15'}
-              style={{
-                opacity: 0,
-                animation: 'changeOpacity 1s ease-in-out 1 forwards',
-                animationDirection: 'forwards'
-              }}
-              variant="h1">
-              MY JOURNEY
-            </StyledTitleTypography>
-            <StyledTypography
-              className={inSpace ? 'white' : '#0e0f15'}
-              style={{
-                opacity: 0,
-                animation: 'changeOpacity 1s ease-in-out 1 forwards',
-                animationDelay: '0.5s'
-              }}
-              variant="h5">
-              to become front end developer
-            </StyledTypography>
-            <StyledButton
-              size="large"
-              color="primary"
-              variant="outlined"
-              component={Link}
-              to="/navigation"
-              style={{ color: 'white', animationDelay: '1.7s' }}
-              title="NAVIGATE">
-            </StyledButton>
-          </Box>
-        </WrapTexts>
-        <WrapAstronaut>
-          <Astronaut
-            style={
-              inSpace
-                ? { backgroundColor: 'transparent' }
-                : { backgroundColor: '#0e0f15' }
-            }>
-              {!inSpace && <CircleImg src={circle} alt="circle" />}
-              <AstronautImg src={astronaut} alt="astronaut" />
-              <PlanetImg src={planet} alt="planet" />
-          </Astronaut>
-        </WrapAstronaut>
-      </Wrapper>
+        <Wrapper>
+          <WrapTexts>
+            <Box sx={{ mt: 4 }}>
+              <StyledTypography
+                className={inSpace ? 'white' : '#0e0f15'}
+                style={{
+                  opacity: 0,
+                  animation: 'changeOpacity 1s ease-in-out 1 forwards',
+                  animationDelay: '1.7s'
+                }}
+                variant="subtitle2">
+                mission duration:
+              </StyledTypography>
+              <StyledTypography
+                className={inSpace ? 'white' : '#0e0f15'}
+                style={{
+                  opacity: 0,
+                  animation: 'changeOpacity 1s ease-in-out 1 forwards',
+                  animationDelay: '1.7s'
+                }}
+                variant="subtitle1">
+                {`${time.months} ${time.days} ${time.hours} ${time.minutes} ${time.seconds}`}
+              </StyledTypography>
+            </Box>
+            <Box sx={{ m: 2 }}>
+              <StyledTitleTypography
+                className={inSpace ? 'white' : '#0e0f15'}
+                style={{
+                  opacity: 0,
+                  animation: 'changeOpacity 1s ease-in-out 1 forwards',
+                  animationDirection: 'forwards'
+                }}
+                variant="h1">
+                MY JOURNEY
+              </StyledTitleTypography>
+              <StyledTypography
+                className={inSpace ? 'white' : '#0e0f15'}
+                style={{
+                  opacity: 0,
+                  animation: 'changeOpacity 1s ease-in-out 1 forwards',
+                  animationDelay: '0.5s'
+                }}
+                variant="h5">
+                to become front end developer
+              </StyledTypography>
+              <StyledButton
+                size="large"
+                color="primary"
+                variant="outlined"
+                component={Link}
+                to="/navigation"
+                style={{ color: 'white', animationDelay: '1.7s' }}
+                title="NAVIGATE">
+              </StyledButton>
+            </Box>
+          </WrapTexts>
+          <WrapAstronaut>
+            <Astronaut
+              style={
+                inSpace
+                  ? { backgroundColor: 'transparent' }
+                  : { backgroundColor: '#0e0f15' }
+              }>
+              {/*{!inSpace && <CircleImg onLoad={() => checkLoadingImg()} src={circle} alt="circle" />}*/}
+              <AstronautImg
+                style={imgsFullyLoaded ? {} : {display: 'none'}}
+                onLoad={() => checkLoadingImg()}
+                src={astronaut}
+                alt="astronaut" />
+              <PlanetImg
+                style={imgsFullyLoaded ? {} : {display: 'none'}}
+                onLoad={() => checkLoadingImg()}
+                src={planet}
+                alt="planet" />
+            </Astronaut>
+          </WrapAstronaut>
+        </Wrapper>
     </>
   )
 }
