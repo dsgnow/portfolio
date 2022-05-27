@@ -7,6 +7,7 @@ import cloud3 from "../../Assets/Images/grey3Right.svg";
 import cloud4 from "../../Assets/Images/grey4Right.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -212,6 +213,10 @@ const CloudImg4 = styled.img`
 
 function Skills() {
 
+  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
+  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
+  const imagesNumber = 5;
+
   const skills = [
     {icon: faReact, name: 'React', level: '', key: 1},
     {icon: faAngular, name: 'Angular', level: '', key: 2},
@@ -222,6 +227,13 @@ function Skills() {
     {icon: faGit, name: 'Git', level: '', key: 7},
   ]
 
+
+  const checkLoadingImg = () => {
+    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
+    if (numberOfPreloadedImgs + 1 === imagesNumber) {
+      setImgsFullyLoaded(true);
+    }
+  }
 
   return (
     <>
@@ -242,12 +254,32 @@ function Skills() {
           )}
         </Technology>
         <Rocket>
-          <RocketImg src={rocket} alt="rocket" />
+          <RocketImg
+            style={imgsFullyLoaded ? {} : {display: 'none'}}
+            onLoad={() => checkLoadingImg()}
+            src={rocket}
+            alt="rocket" />
           <Clouds>
-            <CloudImg1 src={cloud3} alt="cloud" />
-            <CloudImg2 src={cloud4} alt="cloud" />
-            <CloudImg3 src={cloud3} alt="cloud" />
-            <CloudImg4 src={cloud4} alt="cloud" />
+            <CloudImg1
+              style={imgsFullyLoaded ? {} : {display: 'none'}}
+              onLoad={() => checkLoadingImg()}
+              src={cloud3}
+              alt="cloud" />
+            <CloudImg2
+              style={imgsFullyLoaded ? {} : {display: 'none'}}
+              onLoad={() => checkLoadingImg()}
+              src={cloud4}
+              alt="cloud" />
+            <CloudImg3
+              style={imgsFullyLoaded ? {} : {display: 'none'}}
+              onLoad={() => checkLoadingImg()}
+              src={cloud3}
+              alt="cloud" />
+            <CloudImg4
+              style={imgsFullyLoaded ? {} : {display: 'none'}}
+              onLoad={() => checkLoadingImg()}
+              src={cloud4}
+              alt="cloud" />
           </Clouds>
         </Rocket>
       </Wrapper>
