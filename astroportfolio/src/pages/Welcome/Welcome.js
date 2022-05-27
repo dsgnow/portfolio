@@ -125,8 +125,7 @@ const AstronautImg = styled.img`
       transform: translate(45%, -70%);
     }
   }
-  animation: astronautHeader 3s ease-in-out infinite;
-  animation-direction: alternate-reverse;
+  animation: astronautHeader 3s ease-in-out infinite alternate-reverse, show both 2s;
   @media (orientation: landscape) {
     transform: translate(50%, -45%);
     @keyframes astronautHeader {
@@ -147,6 +146,7 @@ const PlanetImg = styled.img`
   right: 60%;
   transform: translate(50%, -40%);
   z-index: 1;
+  animation: show both 2s;
   @media (orientation: landscape) {
     width: 10vw;
     height: 10vw;

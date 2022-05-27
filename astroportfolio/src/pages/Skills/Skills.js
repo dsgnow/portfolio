@@ -140,7 +140,7 @@ const RocketImg = styled.img`
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
-  animation: rocketStart 6s both;
+  animation: rocketStart 6s both 1s;
 `
 
 const Clouds = styled.div`
@@ -182,7 +182,7 @@ const CloudImg2 = styled.img`
   width: 100%;
   bottom: 0;
   right: 0;
-  animation: greyCloudsRocket 3s reverse both;
+  animation: greyCloudsRocket 3s reverse both ;
   @media (orientation: landscape) {
     width: 50%;
   }

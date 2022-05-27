@@ -90,8 +90,7 @@ const AstronautImg = styled.img`
       transform: translate(5%, 5%);
     }
   }
-  animation: astronautMoving 3s ease-in-out infinite;
-  animation-direction: alternate-reverse;
+  animation: astronautMoving 3s ease-in-out infinite alternate-reverse, show both 2s;
 `
 
 const WrapJobObject = styled.div`
@@ -112,12 +111,14 @@ const JobObjectImg = styled.img`
   }
   animation: objectPulseAndRotate 5s ease-in-out infinite;
   animation-direction: alternate-reverse;
+  animation: show both 2s;
   height: 70%;
   z-index: 1;  
 `
 
 const JobObjectTitleImg = styled.img`
   height: 50%;
+  animation: show both 2s;
 `
 
 const WrapFooter = styled.div`

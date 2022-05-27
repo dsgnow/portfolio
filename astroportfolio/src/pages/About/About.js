@@ -86,6 +86,7 @@ const CornerImg = styled.img`
   position: absolute;
   top: 0;
   right: 0;
+  animation: show both 2s;
   @media(orientation: landscape) and (min-width: 1000px){
     z-index: -1;
     height: 50%;
@@ -189,18 +190,19 @@ const CloudsImg = styled.img`
     //    transform: translate(-2%, 0);
     //  }
     //}
-    &.grey1Right {
-      animation: greyCloudsStaticRight 4s infinite;
-    }
-    &.grey2Right {
-      animation: greyCloudsStaticRight 7s infinite;
-    }
-    &.grey3Right {
-      animation: greyCloudsStaticRight 10s infinite;
-    }
-    &.grey4Right {
-      animation: greyCloudsStaticRight 13s infinite;
-    }
+    // &.grey1Right {
+    //   animation: greyCloudsStaticRight 4s infinite;
+    // }
+    // &.grey2Right {
+    //   animation: greyCloudsStaticRight 7s infinite;
+    // }
+    // &.grey3Right {
+    //   animation: greyCloudsStaticRight 10s infinite;
+    // }
+    // &.grey4Right {
+    //   animation: greyCloudsStaticRight 13s infinite;
+    // }
+  animation: show both 2s;
   z-index: -2;
   display: none;
   @media(orientation: landscape) and (min-height: 500px) and (min-width: 1000px){
