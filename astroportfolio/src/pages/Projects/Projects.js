@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { Spinner } from "../../Assets/Styles/GlobalStyles";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -296,6 +297,23 @@ const CloudsImg = styled.img`
   }
 `
 
+const StyledSpinner = styled(Spinner)`
+  color: black;
+`
+
+const StyledSpinnerTitle = styled(Typography)`
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
+const Main = styled.div`
+ animation: show both 1s 1s; 
+`
+
 const Projects = () => {
   const [projectIndex, setProjectIndex] = useState(0);
 
@@ -386,58 +404,63 @@ const Projects = () => {
   ]
   return (
     <>
-      <NaviStickyButton className="onWhite" route="/navigation" title="Navi"/>
+      <StyledSpinner>
+        <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+      </StyledSpinner>
+        <NaviStickyButton className="onWhite" route="/navigation" title="Navi"/>
         <Background>
-          <CornerImg
-            src={spaceCorner}
-            alt="space with planet"/>
-          <CloudsImg
-            className={"grey1Left"}
-            src={grey1Left}
-            alt="clouds"/>
-          <CloudsImg
-            className={"grey2Left"}
-            src={grey2Left}
-            alt="clouds"/>
-          <CloudsImg
-            className={"grey3Left"}
-            src={grey3Left}
-            alt="clouds"/>
-          <CloudsImg
-            className={"grey4Left"}
-            src={grey4Left}
-            alt="clouds"/>
-          <Wrapper key={projectIndex}>
-          <Mock>
-            <Header>{projects[projectIndex].header}</Header>
-            <MockImg
-              src={projects[projectIndex].image}
-              alt="project presentation" />
-          </Mock>
-          <Project>
-            <WrapTitle>
-              <Title variant="h2">{projects[projectIndex].title1} </Title>
-              <Title className={"primary"} variant="h2">{projects[projectIndex].title2} </Title>
-            </WrapTitle>
-            <Description variants="description">
-              {projects[projectIndex].description}
-            </Description>
-            <WrapButtons>
-              <LinkButton disabled={!projects[projectIndex].git}>
-                <a href={projects[projectIndex].githubLink} target="_blank"  rel="noreferrer"> github </a>
-              </LinkButton>
-              <LinkButton disabled={!projects[projectIndex].live}>
-                <a href={projects[projectIndex].liveLink} target="_blank"  rel="noreferrer"> live </a>
-              </LinkButton>
-            </WrapButtons>
-          </Project>
-          <WrapSlider>
-            <FontAwesomeIcon className="arrow" onClick={() => setIndex(false)} icon={faAngleLeft} size="2x"/>
-            <ProjectIndex>{`${projectIndex + 1} / ${projects.length}`}</ProjectIndex>
-            <FontAwesomeIcon className="arrow" onClick={() => setIndex(true)} icon={faAngleRight} size="2x"/>
-          </WrapSlider>
-        </Wrapper>
-      </Background>
+          <Main>
+            <CornerImg
+              src={spaceCorner}
+              alt="space with planet"/>
+            <CloudsImg
+              className={"grey1Left"}
+              src={grey1Left}
+              alt="clouds"/>
+            <CloudsImg
+              className={"grey2Left"}
+              src={grey2Left}
+              alt="clouds"/>
+            <CloudsImg
+              className={"grey3Left"}
+              src={grey3Left}
+              alt="clouds"/>
+            <CloudsImg
+              className={"grey4Left"}
+              src={grey4Left}
+              alt="clouds"/>
+            <Wrapper key={projectIndex}>
+              <Mock>
+                <Header>{projects[projectIndex].header}</Header>
+                <MockImg
+                  src={projects[projectIndex].image}
+                  alt="project presentation" />
+              </Mock>
+              <Project>
+                <WrapTitle>
+                  <Title variant="h2">{projects[projectIndex].title1} </Title>
+                  <Title className={"primary"} variant="h2">{projects[projectIndex].title2} </Title>
+                </WrapTitle>
+                <Description variants="description">
+                  {projects[projectIndex].description}
+                </Description>
+                <WrapButtons>
+                  <LinkButton disabled={!projects[projectIndex].git}>
+                    <a href={projects[projectIndex].githubLink} target="_blank"  rel="noreferrer"> github </a>
+                  </LinkButton>
+                  <LinkButton disabled={!projects[projectIndex].live}>
+                    <a href={projects[projectIndex].liveLink} target="_blank"  rel="noreferrer"> live </a>
+                  </LinkButton>
+                </WrapButtons>
+              </Project>
+              <WrapSlider>
+                <FontAwesomeIcon className="arrow" onClick={() => setIndex(false)} icon={faAngleLeft} size="2x"/>
+                <ProjectIndex>{`${projectIndex + 1} / ${projects.length}`}</ProjectIndex>
+                <FontAwesomeIcon className="arrow" onClick={() => setIndex(true)} icon={faAngleRight} size="2x"/>
+              </WrapSlider>
+            </Wrapper>
+          </Main>
+        </Background>
     </>
   );
 };

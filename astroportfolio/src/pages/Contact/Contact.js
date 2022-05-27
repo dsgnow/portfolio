@@ -16,6 +16,7 @@ import { Formik } from "formik";
 import emailjs from '@emailjs/browser';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { Spinner } from "../../Assets/Styles/GlobalStyles";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -28,6 +29,7 @@ const Wrapper = styled.div`
   max-width: 1920px;
   height: calc(var(--vh, 1vh) * 100);
   align-items: center;
+  animation: show both 1s 1s;
 `
 
 const ContactWithImage = styled.div`
@@ -109,9 +111,7 @@ const JobObjectImg = styled.img`
       transform: scale(1.1);
     }
   }
-  animation: objectPulseAndRotate 5s ease-in-out infinite;
-  animation-direction: alternate-reverse;
-  animation: show both 2s;
+  animation: objectPulseAndRotate 5s ease-in-out alternate-reverse infinite, show both 2s;
   height: 70%;
   z-index: 1;  
 `
@@ -126,7 +126,6 @@ const WrapFooter = styled.div`
   height: 10%;
   position: relative;
   width: 100%;
-  animation: fadeIn 1s both 0.3s;
   display: flex;
   @media(orientation: landscape) {
     display: none;
@@ -324,6 +323,15 @@ const FlexColumn = styled.div`
   flex-direction: column;
 `
 
+const StyledSpinnerTitle = styled(Typography)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white !important;
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
 function Contact() {
   const sendEmail = (values) => {
     const templateParams = {
@@ -355,6 +363,9 @@ function Contact() {
 
   return (
     <>
+      <Spinner>
+        <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+      </Spinner>
       <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 open={open} autoHideDuration={6000}
                 onClose={() => setOpen(false)}>

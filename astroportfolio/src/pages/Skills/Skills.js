@@ -7,6 +7,7 @@ import cloud3 from "../../Assets/Images/grey3Right.svg";
 import cloud4 from "../../Assets/Images/grey4Right.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import { Spinner } from "../../Assets/Styles/GlobalStyles";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -57,7 +58,7 @@ const Technology = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   gap: 20px;
-  animation: showTechnology 5s both 1.5s;
+  animation: showTechnology 5s both 2.5s;
   padding-bottom: 70px;
   @media (orientation: landscape) {
     flex-direction: row;
@@ -140,7 +141,7 @@ const RocketImg = styled.img`
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
-  animation: rocketStart 6s both 1s;
+  animation: rocketStart 6s both 2s;
 `
 
 const Clouds = styled.div`
@@ -171,7 +172,7 @@ const CloudImg1 = styled.img`
   width: 150%;
   bottom: 0;
   right: 0;
-  animation: greyCloudsRocket 2s reverse both;
+  animation: greyCloudsRocket 2s reverse both 1s;
   @media (orientation: landscape) {
     width: 60%;
   }
@@ -182,7 +183,7 @@ const CloudImg2 = styled.img`
   width: 100%;
   bottom: 0;
   right: 0;
-  animation: greyCloudsRocket 3s reverse both ;
+  animation: greyCloudsRocket 3s reverse both 1s;
   @media (orientation: landscape) {
     width: 50%;
   }
@@ -193,7 +194,7 @@ const CloudImg3 = styled.img`
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  animation: greyCloudsRocket 2s reverse both;
+  animation: greyCloudsRocket 2s reverse both 1s;
   @media (orientation: landscape) {
     width: 50%;
   }
@@ -204,10 +205,23 @@ const CloudImg4 = styled.img`
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  animation: greyCloudsRocket 3s reverse both;
+  animation: greyCloudsRocket 3s reverse both 1s;
   @media (orientation: landscape) {
     width: 50%;
   }
+`
+
+const StyledSpinnerTitle = styled(Typography)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white !important;
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
+const Main = styled.div`
+ animation: show both 1s 1s; 
 `
 
 function Skills() {
@@ -224,42 +238,47 @@ function Skills() {
 
   return (
     <>
+      <Spinner>
+        <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+      </Spinner>
       <NaviStickyButton route="/navigation" title="Navi"></NaviStickyButton>
-      <RocksImg src={rocks} alt="rocks" />
-      <Wrapper>
-        <WrapTitle>
-          <Title variant="h1">Technology </Title>
-          <Title className={"primary"} variant="h1">stack </Title>
-        </WrapTitle>
-        <Technology>
-          {skills.map((skill) =>
-            <Skill key={skill.key}>
-              <FontAwesomeIcon icon={skill.icon} size="lg" style={{color: "white"}}/>
-              <SkillName variant="button">{skill.name}</SkillName>
-              <SkillLevel variant="subtitle2">{skill.level}</SkillLevel>
-            </Skill>
-          )}
-        </Technology>
-        <Rocket>
-          <RocketImg
-            src={rocket}
-            alt="rocket" />
-          <Clouds>
-            <CloudImg1
-              src={cloud3}
-              alt="cloud" />
-            <CloudImg2
-              src={cloud4}
-              alt="cloud" />
-            <CloudImg3
-              src={cloud3}
-              alt="cloud" />
-            <CloudImg4
-              src={cloud4}
-              alt="cloud" />
-          </Clouds>
-        </Rocket>
-      </Wrapper>
+      <Main>
+        <RocksImg src={rocks} alt="rocks" />
+        <Wrapper>
+          <WrapTitle>
+            <Title variant="h1">Technology </Title>
+            <Title className={"primary"} variant="h1">stack </Title>
+          </WrapTitle>
+          <Technology>
+            {skills.map((skill) =>
+              <Skill key={skill.key}>
+                <FontAwesomeIcon icon={skill.icon} size="lg" style={{color: "white"}}/>
+                <SkillName variant="button">{skill.name}</SkillName>
+                <SkillLevel variant="subtitle2">{skill.level}</SkillLevel>
+              </Skill>
+            )}
+          </Technology>
+          <Rocket>
+            <RocketImg
+              src={rocket}
+              alt="rocket" />
+            <Clouds>
+              <CloudImg1
+                src={cloud3}
+                alt="cloud" />
+              <CloudImg2
+                src={cloud4}
+                alt="cloud" />
+              <CloudImg3
+                src={cloud3}
+                alt="cloud" />
+              <CloudImg4
+                src={cloud4}
+                alt="cloud" />
+            </Clouds>
+          </Rocket>
+        </Wrapper>
+      </Main>
     </>
   )
 }

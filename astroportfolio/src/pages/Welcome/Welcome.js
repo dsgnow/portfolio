@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import astronaut from '../../Assets/Images/astronaut.png'
 import planet from '../../Assets/Images/planet1.png'
 import { Link } from 'react-router-dom';
+import { Spinner } from '../../Assets/Styles/GlobalStyles'
 
 const StyledTitleTypography = styled(Typography)`
   margin: unset !important;
@@ -39,6 +40,7 @@ const Wrapper = styled.div`
   min-height: 500px;
   background-color: transparent;
   justify-content: center;
+  animation: show both 1s 1s;
   @media (orientation: landscape) {
     display: flex;
     flex-direction: row;
@@ -158,6 +160,15 @@ const StyledButton = styled(Button)`
   animation-delay: 1.7s;
 `
 
+const StyledSpinnerTitle = styled(Typography)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white !important;
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
 const Welcome = () => {
   const [inSpace] = useState(true)
   const [time, setTime] = useState({
@@ -212,6 +223,9 @@ const Welcome = () => {
 
   return (
     <>
+      <Spinner>
+        <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+      </Spinner>
         <Wrapper>
           <WrapTexts>
             <Box sx={{ mt: 4 }}>

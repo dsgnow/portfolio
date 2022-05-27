@@ -47,3 +47,88 @@ export const StyledTitleTypography = styled(Typography)`
     margin: 60px 0;
    `} */
 `
+
+export const Spinner = styled.div`
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: show both alternate-reverse 1s;
+  display: inline-block;
+  width: 10em;
+  height: 10em;
+  color: white;
+  vertical-align: middle;
+  pointer-events: none;
+  transform: rotateZ(45deg), translate(-50%, -50%);
+  perspective: 1000px;
+  border-radius: 50%;
+  &:before,
+  &:after {
+     content: '';
+     display: block;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: inherit;
+     height: inherit;
+     border-radius: 50%;
+     animation: 1s spin linear infinite;
+   }
+  &:before {
+     transform: rotateX(70deg);
+   }
+  &:after {
+     transform: rotateY(70deg);
+     animation-delay: .4s;
+   }
+  }
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    box-shadow: .2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: .2em .2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 .2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -.2em .2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -.2em -.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: .2em -.2em 0 0 currentcolor;
+  }
+`
+
+

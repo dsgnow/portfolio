@@ -7,6 +7,7 @@ import NaviButton from '../../UI/Button/NaviButton'
 import { Link, useNavigate } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import NaviStickyButton from "../../UI/Button/NaviStickyButton";
+import { Spinner } from "../../Assets/Styles/GlobalStyles";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   justify-content: center;
   overflow: hidden;
+  animation: show both 1s 1s;
   @media(orientation: landscape) {
     justify-content: flex-end;
   }
@@ -117,7 +119,7 @@ const Cocpit = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
-  animation: fadeIn 1s both;
+  animation: fadeIn 1s both 1s;
   @media (min-height: 900px) and (orientation: landscape) {
     height: 300px;
   }
@@ -179,6 +181,15 @@ const Title = styled(Typography)`
   }
 `
 
+const StyledSpinnerTitle = styled(Typography)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white !important;
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
 function Navigation() {
   // const { changeStarSpeed } = props
 
@@ -188,8 +199,11 @@ function Navigation() {
 
   return (
     <>
+      <Spinner>
+        <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+      </Spinner>
+      <NaviStickyButton onClick={() => navigate(-1)} route="" title="Exit"></NaviStickyButton>
       <Wrapper>
-        <NaviStickyButton onClick={() => navigate(-1)} route="" title="Exit"></NaviStickyButton>
         <WrapTitle>
           <Title variant="h1">Navigation </Title>
         </WrapTitle>

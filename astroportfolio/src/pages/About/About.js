@@ -10,6 +10,7 @@ import grey1Right from "../../Assets/Images/grey1Right.svg";
 import grey2Right from "../../Assets/Images/grey2Right.svg";
 import grey3Right from "../../Assets/Images/grey3Right.svg";
 import grey4Right from "../../Assets/Images/grey4Right.svg";
+import { Spinner } from "../../Assets/Styles/GlobalStyles";
 
 const Background = styled.div`
   background-color: white;
@@ -213,48 +214,70 @@ const CloudsImg = styled.img`
   }
 `
 
+const StyledSpinner = styled(Spinner)`
+  color: black;
+`
+
+const StyledSpinnerTitle = styled(Typography)`
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: show 1s ease-in-out infinite alternate-reverse;
+`
+
+const Main = styled.div`
+ animation: show both 1s 1s; 
+`
+
 const About = () => {
   return (
   <>
+    <StyledSpinner>
+      <StyledSpinnerTitle variant="subtitle1">Loading</StyledSpinnerTitle>
+    </StyledSpinner>
     <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
     <Background>
-      <CornerImg
-        src={spaceCorner}
-        alt="space with planet"></CornerImg>
-      <CloudsImg
-        className={"grey1Right"}
-        src={grey1Right}
-        alt="clouds"/>
-      <CloudsImg
-        className={"grey2Right"}
-        src={grey2Right}
-        alt="clouds"/>
-      <CloudsImg
-        className={"grey3Right"}
-        src={grey3Right}
-        alt="clouds"/>
-      <CloudsImg
-        className={"grey4Right"}
-        src={grey4Right}
-        alt="clouds"/>
-      <Wrapper>
-        <WrapImage>
-        </WrapImage>
-        <WrapTexts>
-          <PiotrImg
-            src={piotr}
-            alt="invitation title"></PiotrImg>
-          <Description variants="description">
-            Hello, my name is Piotr and I am glad that you are interested in my portfolio. I am a graphic designer by education, but I also develop as a frontend programmer. In my projects, I try to use the latest technologies and develop in new areas. If you like my projects, please contact me.
-          </Description>
-          <ContactButton
-            component={Link}
-            title="Contact"
-            to="/contact">
-            Contact
-          </ContactButton>
-        </WrapTexts>
-      </Wrapper>
+      <Main>
+        <CornerImg
+          src={spaceCorner}
+          alt="space with planet"></CornerImg>
+        <CloudsImg
+          className={"grey1Right"}
+          src={grey1Right}
+          alt="clouds"/>
+        <CloudsImg
+          className={"grey2Right"}
+          src={grey2Right}
+          alt="clouds"/>
+        <CloudsImg
+          className={"grey3Right"}
+          src={grey3Right}
+          alt="clouds"/>
+        <CloudsImg
+          className={"grey4Right"}
+          src={grey4Right}
+          alt="clouds"/>
+        <Wrapper>
+          <WrapImage>
+          </WrapImage>
+          <WrapTexts>
+            <PiotrImg
+              src={piotr}
+              alt="invitation title"></PiotrImg>
+            <Description variants="description">
+              Hello, my name is Piotr and I am glad that you are interested in my portfolio. I am a graphic designer by education, but I also develop as a frontend programmer. In my projects, I try to use the latest technologies and develop in new areas. If you like my projects, please contact me.
+            </Description>
+            <ContactButton
+              component={Link}
+              title="Contact"
+              to="/contact">
+              Contact
+            </ContactButton>
+          </WrapTexts>
+        </Wrapper>
+      </Main>
     </Background>
   </>
   );
