@@ -298,9 +298,6 @@ const CloudsImg = styled.img`
 
 const Projects = () => {
   const [projectIndex, setProjectIndex] = useState(0);
-  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
-  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
-  const imagesNumber = 6;
 
   const setIndex = (add) => {
     const maxIndex = projects.length
@@ -316,13 +313,6 @@ const Projects = () => {
       } else {
         setProjectIndex(projectIndex - 1)
       }
-    }
-  }
-
-  const checkLoadingImg = () => {
-    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
-    if (numberOfPreloadedImgs + 1 === imagesNumber) {
-      setImgsFullyLoaded(true);
     }
   }
 
@@ -399,31 +389,21 @@ const Projects = () => {
       <NaviStickyButton className="onWhite" route="/navigation" title="Navi"/>
         <Background>
           <CornerImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             src={spaceCorner}
             alt="space with planet"/>
           <CloudsImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             className={"grey1Left"}
             src={grey1Left}
             alt="clouds"/>
           <CloudsImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             className={"grey2Left"}
             src={grey2Left}
             alt="clouds"/>
           <CloudsImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             className={"grey3Left"}
             src={grey3Left}
             alt="clouds"/>
           <CloudsImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             className={"grey4Left"}
             src={grey4Left}
             alt="clouds"/>
@@ -431,8 +411,6 @@ const Projects = () => {
           <Mock>
             <Header>{projects[projectIndex].header}</Header>
             <MockImg
-              style={imgsFullyLoaded ? {} : {display: 'none'}}
-              onLoad={() => checkLoadingImg()}
               src={projects[projectIndex].image}
               alt="project presentation" />
           </Mock>

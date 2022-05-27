@@ -214,46 +214,26 @@ const CloudsImg = styled.img`
 `
 
 const About = () => {
-  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
-  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
-  const imagesNumber = 6;
-
-  const checkLoadingImg = () => {
-    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
-    if (numberOfPreloadedImgs + 1 === imagesNumber) {
-      setImgsFullyLoaded(true);
-    }
-  }
   return (
   <>
     <NaviStickyButton className="onWhite" route="/navigation" title="Navi"></NaviStickyButton>
     <Background>
       <CornerImg
-        style={imgsFullyLoaded ? {} : {display: 'none'}}
-        onLoad={() => checkLoadingImg()}
         src={spaceCorner}
         alt="space with planet"></CornerImg>
       <CloudsImg
-        style={imgsFullyLoaded ? {} : {display: 'none'}}
-        onLoad={() => checkLoadingImg()}
         className={"grey1Right"}
         src={grey1Right}
         alt="clouds"/>
       <CloudsImg
-        style={imgsFullyLoaded ? {} : {display: 'none'}}
-        onLoad={() => checkLoadingImg()}
         className={"grey2Right"}
         src={grey2Right}
         alt="clouds"/>
       <CloudsImg
-        style={imgsFullyLoaded ? {} : {display: 'none'}}
-        onLoad={() => checkLoadingImg()}
         className={"grey3Right"}
         src={grey3Right}
         alt="clouds"/>
       <CloudsImg
-        style={imgsFullyLoaded ? {} : {display: 'none'}}
-        onLoad={() => checkLoadingImg()}
         className={"grey4Right"}
         src={grey4Right}
         alt="clouds"/>
@@ -262,8 +242,6 @@ const About = () => {
         </WrapImage>
         <WrapTexts>
           <PiotrImg
-            style={imgsFullyLoaded ? {} : {display: 'none'}}
-            onLoad={() => checkLoadingImg()}
             src={piotr}
             alt="invitation title"></PiotrImg>
           <Description variants="description">

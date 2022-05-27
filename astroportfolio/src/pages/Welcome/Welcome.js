@@ -3,7 +3,6 @@ import Button from '../../UI/Button/Button'
 import Typography from '@material-ui/core/Typography'
 import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
-import circle from '../../Assets/Images/circle.png'
 import astronaut from '../../Assets/Images/astronaut.png'
 import planet from '../../Assets/Images/planet1.png'
 import { Link } from 'react-router-dom';
@@ -168,9 +167,6 @@ const Welcome = () => {
     minutes: '',
     seconds: ''
   })
-  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
-  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
-  const imagesNumber = 2;
 
   useEffect(() => {
     const calcTime = () => {
@@ -213,13 +209,6 @@ const Welcome = () => {
       clearInterval(timeInterval)
     }
   }, [])
-
-  const checkLoadingImg = () => {
-    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
-    if (numberOfPreloadedImgs + 1 === imagesNumber) {
-      setImgsFullyLoaded(true);
-    }
-  }
 
   return (
     <>
@@ -286,15 +275,11 @@ const Welcome = () => {
                   ? { backgroundColor: 'transparent' }
                   : { backgroundColor: '#0e0f15' }
               }>
-              {/*{!inSpace && <CircleImg onLoad={() => checkLoadingImg()} src={circle} alt="circle" />}*/}
+              {/*{!inSpace && <CircleImg src={circle} alt="circle" />}*/}
               <AstronautImg
-                style={imgsFullyLoaded ? {} : {display: 'none'}}
-                onLoad={() => checkLoadingImg()}
                 src={astronaut}
                 alt="astronaut" />
               <PlanetImg
-                style={imgsFullyLoaded ? {} : {display: 'none'}}
-                onLoad={() => checkLoadingImg()}
                 src={planet}
                 alt="planet" />
             </Astronaut>

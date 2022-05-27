@@ -326,17 +326,6 @@ const FlexColumn = styled.div`
 `
 
 function Contact() {
-  const [imgsFullyLoaded, setImgsFullyLoaded] = useState(false);
-  const [numberOfPreloadedImgs, setNumberOfPreloadedImgs] = useState(0);
-  const imagesNumber = 3;
-
-  const checkLoadingImg = () => {
-    setNumberOfPreloadedImgs(numberOfPreloadedImgs + 1)
-    if (numberOfPreloadedImgs + 1 === imagesNumber) {
-      setImgsFullyLoaded(true);
-    }
-  }
-
   const sendEmail = (values) => {
     const templateParams = {
       name: values.name,
@@ -443,21 +432,15 @@ function Contact() {
           </ContactForm>
           <WrapImages>
             <AstronautImg
-              style={imgsFullyLoaded ? {} : {display: 'none'}}
-              onLoad={() => checkLoadingImg()}
               src={astronaut}
               alt="astronaut">
             </AstronautImg>
             <WrapJobObject>
               <JobObjectImg
-                style={imgsFullyLoaded ? {} : {display: 'none'}}
-                onLoad={() => checkLoadingImg()}
                 src={jobObject}
                 alt="job object">
               </JobObjectImg>
               <JobObjectTitleImg
-                style={imgsFullyLoaded ? {} : {display: 'none'}}
-                onLoad={() => checkLoadingImg()}
                 src={jobTitle}
                 alt="job object title">
               </JobObjectTitleImg>
