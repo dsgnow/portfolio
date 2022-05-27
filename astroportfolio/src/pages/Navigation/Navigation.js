@@ -166,7 +166,7 @@ const WrapTitle = styled.div`
   justify-content: space-evenly;
   animation: showTechnology 1s both;
   display: none;
-  @media (orientation: landscape) and (min-width: 1000px) {
+  @media (orientation: landscape) and (min-width: 1000px) and (min-height: 1100px) {
     display: block;
   }
 `

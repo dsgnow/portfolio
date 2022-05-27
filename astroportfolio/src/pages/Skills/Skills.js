@@ -7,7 +7,6 @@ import cloud3 from "../../Assets/Images/grey3Right.svg";
 import cloud4 from "../../Assets/Images/grey4Right.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
-import { useState } from "react";
 
 const Wrapper = styled.div`
   overflow: hidden;
