@@ -1,2 +1,2 @@
 # portfolio
-astro portfolio - react
+Portfolio page, created with React, Material UI and styled components.
