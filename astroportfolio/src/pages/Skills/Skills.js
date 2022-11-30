@@ -227,9 +227,9 @@ const Main = styled.div`
 function Skills() {
 
   const skills = [
-    {icon: faReact, name: 'React', level: '', key: 1},
-    {icon: faAngular, name: 'Angular', level: '', key: 2},
-    {icon: faVuejs, name: 'Vue', level: '', key: 3},
+    {icon: faAngular, name: 'Angular', level: '', key: 1},
+    {icon: faReact, name: 'React', level: '', key: 2},
+    {icon: faReact, name: 'React-Native', level: '', key: 3},
     {icon: faHtml5, name: 'Html5', level: '', key: 4},
     {icon: faCss3, name: 'Css3', level: '', key: 5},
     {icon: faSass, name: 'Sass', level: '', key: 6},

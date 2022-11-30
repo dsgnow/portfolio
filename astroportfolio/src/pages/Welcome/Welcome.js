@@ -172,6 +172,7 @@ const StyledSpinnerTitle = styled(Typography)`
 const Welcome = () => {
   const [inSpace] = useState(true)
   const [time, setTime] = useState({
+    years: '',
     months: '',
     days: '',
     hours: '',
@@ -181,16 +182,23 @@ const Welcome = () => {
 
   useEffect(() => {
     const calcTime = () => {
-      const endTime = new Date('2020/04/01').getTime()
+      const endTime = new Date('2021/08/01').getTime()
       const nowTime = new Date().getTime()
 
+      const years = Math.floor(
+        nowTime / (1000 * 60 * 60 * 24 * 365) -
+        endTime / (1000 * 60 * 60 * 24 * 365)
+      )
+
       const months = Math.floor(
-        nowTime / (1000 * 60 * 60 * 24 * 30.5) -
-          endTime / (1000 * 60 * 60 * 24 * 30.5)
+        (nowTime / (1000 * 60 * 60 * 24 * 30.5) -
+          endTime / (1000 * 60 * 60 * 24 * 30.5)) %
+        (Math.abs(years) * 12)
       )
 
       const days = Math.floor(
-        (nowTime / (1000 * 60 * 60 * 24) - endTime / (1000 * 60 * 60 * 24)) %
+        (nowTime / (1000 * 60 * 60 * 24) -
+          endTime / (1000 * 60 * 60 * 24)) %
           30.5
       )
 
@@ -207,6 +215,7 @@ const Welcome = () => {
       secs = Math.abs(secs) < 10 ? `0${secs}` : secs
 
       setTime({
+        years: Math.abs(years) > 1 ? Math.abs(years) +  ' ys.' : Math.abs(years) +  ' y.',
         months: Math.abs(months) + ' ms.',
         days: Math.abs(days) + ' d.',
         hours: Math.abs(hours) + ' h.',
@@ -237,7 +246,7 @@ const Welcome = () => {
                   animationDelay: '1.7s'
                 }}
                 variant="subtitle2">
-                mission duration:
+                commercial mission duration:
               </StyledTypography>
               <StyledTypography
                 className={inSpace ? 'white' : '#0e0f15'}
@@ -247,7 +256,7 @@ const Welcome = () => {
                   animationDelay: '1.7s'
                 }}
                 variant="subtitle1">
-                {`${time.months} ${time.days} ${time.hours} ${time.minutes} ${time.seconds}`}
+                {`${time.years} ${time.months} ${time.days} ${time.hours} ${time.minutes} ${time.seconds}`}
               </StyledTypography>
             </Box>
             <Box sx={{ m: 2 }}>
@@ -269,7 +278,7 @@ const Welcome = () => {
                   animationDelay: '0.5s'
                 }}
                 variant="h5">
-                to become front end developer
+                in the world of programming
               </StyledTypography>
               <StyledButton
                 size="large"
