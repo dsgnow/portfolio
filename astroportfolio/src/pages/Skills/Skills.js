@@ -55,12 +55,16 @@ const Technology = styled.div`
   }
   display: flex;
   align-items: stretch;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   flex-direction: column;
+  max-height: 70vh;
+  max-width: 90vw;
+  overflow-y: scroll;
   gap: 20px;
   animation: showTechnology 5s both 2.5s;
   padding-bottom: 70px;
   @media (orientation: landscape) {
+  flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
@@ -93,8 +97,8 @@ const Skill = styled.div`
   border-radius: 5px;
   transition: 0.3s;
   &:hover {
-    transform: scale(1.03);
     background-color: ${({ theme }) => theme.palette.primary.main};
+    cursor: pointer;
   }
   @media (orientation: landscape) and (min-width: 1000px) {
     width: 30%;
@@ -234,6 +238,13 @@ function Skills() {
     {icon: faCss3, name: 'Css3', level: '', key: 5},
     {icon: faSass, name: 'Sass', level: '', key: 6},
     {icon: faGit, name: 'Git', level: '', key: 7},
+    {icon: null, name: 'Javascript ES6+', level: '', key: 8},
+    {icon: null, name: 'Typescript', level: '', key: 9},
+    {icon: null, name: 'PrimeNG', level: '', key: 10},
+    {icon: null, name: 'Material UI', level: '', key: 11},
+    {icon: null, name: 'RWD', level: '', key: 12},
+    {icon: null, name: 'Figma', level: '', key: 13},
+    {icon: null, name: 'Adobe', level: '', key: 14},
   ]
 
   return (
